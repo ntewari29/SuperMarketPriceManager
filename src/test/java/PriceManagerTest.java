@@ -47,6 +47,6 @@ public class PriceManagerTest {
         superMarket.addItem(corona);
         superMarket.addItem(whisky);
         superMarket.addItem(bread);
-        assertThat(superMarket.totalValueOfCart(), is(538.0));
+        assertThat(superMarket.totalValueOfCart(), is(554.25));
     }
 }
