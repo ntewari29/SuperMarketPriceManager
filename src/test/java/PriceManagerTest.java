@@ -1,4 +1,3 @@
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -48,5 +47,18 @@ public class PriceManagerTest {
         superMarket.addItem(whisky);
         superMarket.addItem(bread);
         assertThat(superMarket.totalValueOfCart(), is(554.25));
+    }
+
+    @Test
+    public void totalNumberOfItemsInTheCart() {
+        Inventory milk = new Inventory("1","Milk",5.0);
+        Inventory corona = new Inventory("2","Corona",11.25);
+        Inventory whisky = new Inventory("3","Ardbeg",526.0);
+        Inventory bread = new Inventory("4","Bread",12.0);
+        superMarket.addItem(milk);
+        superMarket.addItem(corona);
+        superMarket.addItem(whisky);
+        superMarket.addItem(bread);
+        assertThat(superMarket.itemsInTheCart(), is(4));
     }
 }
