@@ -37,7 +37,7 @@ public class PriceManagerTest {
         assertThat(milk.itemPrice, is(5.0));
     }
 
-    /*@Test
+    @Test
     public void calculateTotalValueOfItemsAddedToTheInventory() {
         Inventory milk = new Inventory("1","Milk",5.0);
         Inventory corona = new Inventory("2","Corona",11.25);
@@ -47,6 +47,6 @@ public class PriceManagerTest {
         superMarket.addItem(corona);
         superMarket.addItem(whisky);
         superMarket.addItem(bread);
-        assertThat(, is(5.0));
-    }*/
+        assertThat(superMarket.totalValueOfCart(), is(538.0));
+    }
 }
