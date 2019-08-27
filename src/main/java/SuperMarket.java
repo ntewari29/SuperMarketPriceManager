@@ -11,7 +11,9 @@ public class SuperMarket {
     }
 
     public void addItem(Inventory inventory) {
-        inventoryList.add(inventory);
+        if(inventory.itemPrice > 0 && inventory.storeQty > 0) {
+            inventoryList.add(inventory);
+        }
     }
 
     public Double totalValueOfCart() {
