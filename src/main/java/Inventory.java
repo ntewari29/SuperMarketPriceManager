@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Inventory {
     public final String serialNumber;
     public final String itemName;
