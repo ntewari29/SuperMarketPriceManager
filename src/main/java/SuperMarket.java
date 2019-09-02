@@ -11,17 +11,26 @@ public class SuperMarket {
     }
 
     public void addItem(Inventory inventory) {
-        if(inventory.itemPrice > 0 && inventory.storeQty > 0) {
+        if (inventory.itemPrice > 0 && inventory.storeQty > 0) {
             inventoryList.add(inventory);
         }
     }
 
     public Double totalValueOfCart() {
         for (int i = 0; i < inventoryList.size(); i++) {
-            individualItemPrice = inventoryList.get(i).itemPrice;
-            cartPrice = cartPrice + individualItemPrice;
+            if (inventoryList.get(i).hasPromotion) {
+                cartPrice = calculatePromotion();
+            }
+            else {
+                individualItemPrice = inventoryList.get(i).itemPrice;
+                cartPrice = cartPrice + individualItemPrice;
+            }
         }
         return cartPrice;
+    }
+
+    private Double calculatePromotion() {
+        return 0d;
     }
 
     public Integer itemsInTheCart() {
