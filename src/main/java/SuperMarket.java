@@ -3,8 +3,10 @@ import java.util.List;
 
 public class SuperMarket {
     List<Inventory> inventoryList = new ArrayList<>();
+    List<Promotions> promoList = new ArrayList<>();
     Double cartPrice = 0d;
     Double individualItemPrice = 0d;
+    Double promoPrice = 0d;
 
     public List<Inventory> initializeInventory() {
         return inventoryList;
@@ -16,12 +18,17 @@ public class SuperMarket {
         }
     }
 
+    public void addPromo(Promotions promotions) {
+        if (promotions.promoPrice > 0 && promotions.promoPrice > 0) {
+            promoList.add(promotions);
+        }
+    }
+
     public Double totalValueOfCart() {
         for (int i = 0; i < inventoryList.size(); i++) {
             if (inventoryList.get(i).hasPromotion) {
                 cartPrice = calculatePromotion();
-            }
-            else {
+            } else {
                 individualItemPrice = inventoryList.get(i).itemPrice;
                 cartPrice = cartPrice + individualItemPrice;
             }
@@ -30,7 +37,15 @@ public class SuperMarket {
     }
 
     private Double calculatePromotion() {
-        return 0d;
+        cartPrice = 0d;  //This doesnt seem to be the correct implementation of the promotion calculation
+        for (int i = 0; i < inventoryList.size(); i++) {
+            if (inventoryList.get(i).itemName.equals(promoList.get(i).itemOnPromo)) {
+                promoPrice = promoList.get(i).promoPrice;
+                cartPrice = cartPrice + promoPrice;
+            }
+        }
+        System.out.printf("Promo Cart Price" + cartPrice);
+        return cartPrice;
     }
 
     public Integer itemsInTheCart() {

@@ -11,6 +11,13 @@ public class PriceManagerTest {
 
     SuperMarket superMarket = new SuperMarket();
 
+    public void includePromotions(){
+        Promotions milk = new Promotions("1","Milk",15.0, 4);
+        Promotions corona = new Promotions("2","Corona",30.0, 3);
+        superMarket.addPromo(milk);
+        superMarket.addPromo(corona);
+    }
+
     @Test
     public void checkTheStoreInventory() {
         List<Inventory> inventory = superMarket.initializeInventory();
@@ -75,6 +82,7 @@ public class PriceManagerTest {
 
     @Test
     public void verifyPromotionsOnTheItemsAddedToTheCart() {
+        includePromotions();
         Inventory milk = new Inventory("1","Milk",5.0, 4, true);
         Inventory corona = new Inventory("2","Corona",11.25, 3, true);
         superMarket.addItem(milk);
