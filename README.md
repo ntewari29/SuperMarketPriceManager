@@ -4,8 +4,13 @@ Super Market Price Management System, will be developed following the guidelines
 The following sequence of steps is generally followed:
 
 Add a test
+
 Run all tests and see if the new one fails
+
 Write some code
+
 Run tests
+
 Refactor code
+
 Repeat
