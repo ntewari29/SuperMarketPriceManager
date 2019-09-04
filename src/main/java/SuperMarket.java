@@ -19,7 +19,7 @@ public class SuperMarket {
     }
 
     public void addPromo(Promotions promotions) {
-        if (promotions.promoPrice > 0 && promotions.promoPrice > 0) {
+        if (promotions.promoPrice > 0 && promotions.promoQty > 0) {
             promoList.add(promotions);
         }
     }
@@ -50,5 +50,9 @@ public class SuperMarket {
 
     public Integer itemsInTheCart() {
         return inventoryList.size();
+    }
+
+    public String generateReceipt() {
+        return "";
     }
 }
