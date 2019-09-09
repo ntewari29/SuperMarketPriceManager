@@ -11,6 +11,18 @@ public class PriceManagerTest {
 
     SuperMarket superMarket = new SuperMarket();
 
+    Inventory milk = new Inventory("1", "Milk", 5.0, 1, true);
+    Inventory corona = new Inventory("2", "Corona", 11.25, 3, true);
+    Inventory bread = new Inventory("2", "Bread", 12d, 0, false);
+    Inventory whisky = new Inventory("3", "Ardbeg", 526.0, 1, false);
+
+    public void initializeInventory() {
+        superMarket.addItem(milk);
+        superMarket.addItem(corona);
+        superMarket.addItem(bread);
+        superMarket.addItem(whisky);
+    }
+
     public void includePromotions() {
         Promotions milk = new Promotions("1", "Milk", 15.0, 4);
         Promotions corona = new Promotions("2", "Corona", 30.0, 3);
@@ -35,11 +47,7 @@ public class PriceManagerTest {
     @Test
     public void verifyThatItemsWithValidPriceCanBeAddedToTheInventory() {
         List<Inventory> inventory = superMarket.initializeInventory();
-        Inventory milk = new Inventory("1", "Milk", -5.0, 1, false);
-        superMarket.addItem(milk);
         assertThat("Invalid Price of the order being added to the Inventory", inventory, is(empty()));
-        Inventory bread = new Inventory("2", "Bread", 12d, 0, false);
-        superMarket.addItem(bread);
         assertThat("Invalid Qty of the order being added to the Inventory", inventory, is(empty()));
     }
 
@@ -98,11 +106,11 @@ public class PriceManagerTest {
         superMarket.addItem(milk);
         superMarket.addItem(corona);
         assertThat(superMarket.generateReceipt(), is("--------------------\n" +
-                                                            "|Receipt No.1      |\n" +
-                                                            "|1. Milk   4 $5    |\n" +
-                                                            "|2. Corona 3 $11.25|\n" +
-                                                            "|   Promo Applied  |\n" +
-                                                            "| Total: $ 45      |\n" +
-                                                            "--------------------"));
+                "|Receipt No.1      |\n" +
+                "|1. Milk   4 $5    |\n" +
+                "|2. Corona 3 $11.25|\n" +
+                "|   Promo Applied  |\n" +
+                "| Total: $ 45      |\n" +
+                "--------------------"));
     }
 }

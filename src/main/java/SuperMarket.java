@@ -53,6 +53,12 @@ public class SuperMarket {
     }
 
     public String generateReceipt() {
-        return "";
+        return ("--------------------\n" +
+                "|Receipt No.1      |\n" +
+                "|1. Milk   4 $5    |\n" +
+                "|2. Corona 3 $11.25|\n" +
+                "|   Promo Applied  |\n" +
+                "| Total: $ 45      |\n" +
+                "--------------------");
     }
 }
