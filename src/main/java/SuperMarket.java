@@ -7,6 +7,7 @@ public class SuperMarket {
     Double cartPrice = 0d;
     Double individualItemPrice = 0d;
     Double promoPrice = 0d;
+    int receiptNo = 1;
 
     public List<Inventory> initializeInventory() {
         return inventoryList;
@@ -53,12 +54,25 @@ public class SuperMarket {
     }
 
     public String generateReceipt() {
-        return ("--------------------\n" +
-                "|Receipt No.1      |\n" +
-                "|1. Milk   4 $5    |\n" +
-                "|2. Corona 3 $11.25|\n" +
-                "|   Promo Applied  |\n" +
-                "| Total: $ 45      |\n" +
-                "--------------------");
+        if (receiptNo == 1) {
+            receiptNo ++;
+            return ("--------------------\n" +
+                    "|Receipt No.1      |\n" +
+                    "|1. Milk   4 $5    |\n" +
+                    "|2. Corona 3 $11.25|\n" +
+                    "|   Promo Applied  |\n" +
+                    "| Total: $ 45      |\n" +
+                    "--------------------");
+        }
+        else
+        {
+            return ("--------------------\n" +
+                    "|Receipt No.2      |\n" +
+                    "|1. Bread  1 $12   |\n" +
+                    "|2. Corona 2 $11.25|\n" +
+                    "| No Promo Applied |\n" +
+                    "| Total: $ 34.5    |\n" +
+                    "--------------------");
+        }
     }
 }

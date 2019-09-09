@@ -16,6 +16,8 @@ public class PriceManagerTest {
     Inventory bread = new Inventory("2", "Bread", 12d, 0, false);
     Inventory whisky = new Inventory("3", "Ardbeg", 526.0, 1, false);
 
+    int receiptNo = 1;
+
     public void initializeInventory() {
         superMarket.addItem(milk);
         superMarket.addItem(corona);
@@ -99,18 +101,33 @@ public class PriceManagerTest {
     }
 
     @Test
-    public void generateReceiptAfterChecout() {
+    public void generateReceiptAfterCheckout() {
         includePromotions();
-        Inventory milk = new Inventory("1", "Milk", 5.0, 4, true);
-        Inventory corona = new Inventory("2", "Corona", 11.25, 3, true);
         superMarket.addItem(milk);
         superMarket.addItem(corona);
-        assertThat(superMarket.generateReceipt(), is("--------------------\n" +
-                "|Receipt No.1      |\n" +
-                "|1. Milk   4 $5    |\n" +
-                "|2. Corona 3 $11.25|\n" +
-                "|   Promo Applied  |\n" +
-                "| Total: $ 45      |\n" +
-                "--------------------"));
+        assertThat(superMarket.generateReceipt(),
+                is("--------------------\n" +
+                        "|Receipt No.1      |\n" +
+                        "|1. Milk   4 $5    |\n" +
+                        "|2. Corona 3 $11.25|\n" +
+                        "|   Promo Applied  |\n" +
+                        "| Total: $ 45      |\n" +
+                        "--------------------"));
+    }
+
+    @Test
+    public void verifyReceiptGeneration() {
+        includePromotions();
+        superMarket.addItem(bread);
+        superMarket.addItem(corona);
+        superMarket.addItem(corona);
+        assertThat(superMarket.generateReceipt(),
+                is("--------------------\n" +
+                        "|Receipt No.2      |\n" +
+                        "|1. Bread  1 $12   |\n" +
+                        "|2. Corona 2 $11.25|\n" +
+                        "| No Promo Applied |\n" +
+                        "| Total: $ 34.5    |\n" +
+                        "--------------------"));
     }
 }
