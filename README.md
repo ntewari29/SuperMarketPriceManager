@@ -8,3 +8,5 @@ The following sequence of steps is generally followed:
 4. Run tests
 5. Refactor code
 6. Repeat
+
+CI Build link: https://travis-ci.org/ntewari29/SuperMarketPriceManager/
