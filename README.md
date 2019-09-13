@@ -10,3 +10,16 @@ The following sequence of steps is generally followed:
 6. Repeat
 
 CI Build link: https://travis-ci.org/ntewari29/SuperMarketPriceManager/
+
+# How to start working on SuperMarketPriceManager?
+1. Fork and Clone the repo.
+   
+   a. git clone git@github.com:ntewari29/SuperMarketPriceManager.git
+2. Open the project in your choice of IDE - New -> Project from VCS -> Git.
+
+   a. I personally love IntelliJ download it here! https://www.jetbrains.com/idea/
+3. Build the Project and get going!
+
+A Git Guide: https://guides.github.com/activities/hello-world/
+
+A good read: https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners
