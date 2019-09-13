@@ -39,6 +39,17 @@ public class PriceManagerTest {
     }
 
     @Test
+    public void checkThatItemsWithInvalidAttributesCannotBeAddedToTheCart() {
+        Inventory garlic = new Inventory("","Garlic", 5.4, 1, false);
+        Inventory moisturiser = new Inventory("2a","Moisturiser", -50.0, 10, false);
+        Inventory pitabread = new Inventory("100","", 15d, 0, false);
+        superMarket.addItem(garlic);
+        superMarket.addItem(moisturiser);
+        superMarket.addItem(pitabread);
+        assertThat(superMarket.inventoryList, is(empty()));
+    }
+
+    @Test
     public void intiateStoreInventoryAndAssertOnTheItemName() {
         Inventory milk = new Inventory("1", "Milk", 5.0, 1, false);
         List<Inventory> inventory = superMarket.initializeInventory();

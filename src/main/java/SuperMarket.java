@@ -14,7 +14,8 @@ public class SuperMarket {
     }
 
     public void addItem(Inventory inventory) {
-        if (inventory.itemPrice > 0 && inventory.storeQty > 0) {
+        boolean serialNo = inventory.serialNumber != "" && inventory.serialNumber != null;
+        if (serialNo && inventory.itemPrice > 0 && inventory.storeQty > 0 && inventory.itemPrice > 0) {
             inventoryList.add(inventory);
         }
     }
@@ -55,7 +56,7 @@ public class SuperMarket {
 
     public String generateReceipt() {
         if (receiptNo == 1) {
-            receiptNo ++;
+            receiptNo++;
             return ("--------------------\n" +
                     "|Receipt No.1      |\n" +
                     "|1. Milk   4 $5    |\n" +
@@ -63,9 +64,7 @@ public class SuperMarket {
                     "|   Promo Applied  |\n" +
                     "| Total: $ 45      |\n" +
                     "--------------------");
-        }
-        else
-        {
+        } else {
             return ("--------------------\n" +
                     "|Receipt No.2      |\n" +
                     "|1. Bread  1 $12   |\n" +
