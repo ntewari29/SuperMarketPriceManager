@@ -55,23 +55,35 @@ public class SuperMarket {
     }
 
     public String generateReceipt() {
-        if (receiptNo == 1) {
-            receiptNo++;
-            return ("--------------------\n" +
-                    "|Receipt No.1      |\n" +
-                    "|1. Milk   4 $5    |\n" +
-                    "|2. Corona 3 $11.25|\n" +
-                    "|   Promo Applied  |\n" +
-                    "| Total: $ 45      |\n" +
-                    "--------------------");
+        if (inventoryList.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            String headAndtail = "--------------------";
+            String boundary = "|                  |";
+            sb.append(headAndtail + "\n");
+            for (int i = 0; i <= 4; i++) {
+                sb.append(boundary + "\n");
+            }
+            sb.append(headAndtail);
+            return sb.toString();
         } else {
-            return ("--------------------\n" +
-                    "|Receipt No.2      |\n" +
-                    "|1. Bread  1 $12   |\n" +
-                    "|2. Corona 2 $11.25|\n" +
-                    "| No Promo Applied |\n" +
-                    "| Total: $ 34.5    |\n" +
-                    "--------------------");
+            if (receiptNo == 1) {
+                receiptNo++;
+                return ("--------------------\n" +
+                        "|Receipt No.1      |\n" +
+                        "|1. Milk   4 $5    |\n" +
+                        "|2. Corona 3 $11.25|\n" +
+                        "|   Promo Applied  |\n" +
+                        "| Total: $ 45      |\n" +
+                        "--------------------");
+            } else {
+                return ("--------------------\n" +
+                        "|Receipt No.2      |\n" +
+                        "|1. Bread  1 $12   |\n" +
+                        "|2. Corona 2 $11.25|\n" +
+                        "| No Promo Applied |\n" +
+                        "| Total: $ 34.5    |\n" +
+                        "--------------------");
+            }
         }
     }
 }

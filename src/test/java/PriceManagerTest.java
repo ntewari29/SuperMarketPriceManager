@@ -112,6 +112,18 @@ public class PriceManagerTest {
     }
 
     @Test
+    public void blankReceiptWhenNoItemIsAddedToTheCart() {
+        assertThat(superMarket.generateReceipt(),
+                is("--------------------\n" +
+                        "|                  |\n" +
+                        "|                  |\n" +
+                        "|                  |\n" +
+                        "|                  |\n" +
+                        "|                  |\n" +
+                        "--------------------"));
+    }
+
+    @Test
     public void generateReceiptAfterCheckout() {
         includePromotions();
         superMarket.addItem(milk);
@@ -123,22 +135,6 @@ public class PriceManagerTest {
                         "|2. Corona 3 $11.25|\n" +
                         "|   Promo Applied  |\n" +
                         "| Total: $ 45      |\n" +
-                        "--------------------"));
-    }
-
-    @Test
-    public void verifyReceiptGeneration() {
-        includePromotions();
-        superMarket.addItem(bread);
-        superMarket.addItem(corona);
-        superMarket.addItem(corona);
-        assertThat(superMarket.generateReceipt(),
-                is("--------------------\n" +
-                        "|Receipt No.2      |\n" +
-                        "|1. Bread  1 $12   |\n" +
-                        "|2. Corona 2 $11.25|\n" +
-                        "| No Promo Applied |\n" +
-                        "| Total: $ 34.5    |\n" +
                         "--------------------"));
     }
 }
