@@ -75,15 +75,8 @@ public class SuperMarket {
                         "|   Promo Applied  |\n" +
                         "| Total: $ 45      |\n" +
                         "--------------------");
-            } else {
-                return ("--------------------\n" +
-                        "|Receipt No.2      |\n" +
-                        "|1. Bread  1 $12   |\n" +
-                        "|2. Corona 2 $11.25|\n" +
-                        "| No Promo Applied |\n" +
-                        "| Total: $ 34.5    |\n" +
-                        "--------------------");
             }
         }
+        return null;
     }
 }
