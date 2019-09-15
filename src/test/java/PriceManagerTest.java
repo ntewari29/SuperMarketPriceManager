@@ -90,8 +90,8 @@ public class PriceManagerTest {
     @Test
     public void verifyPromotionsOnTheItemsAddedToTheCart() {
         includePromotions();
-        Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5), 1, false);
-        Inventory corona = new Inventory("2", "Corona", BigDecimal.valueOf(11.25), 1, false);
+        Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5), 4, true);
+        Inventory corona = new Inventory("2", "Corona", BigDecimal.valueOf(11.25), 3, true);
         superMarket.addItem(milk);
         superMarket.addItem(corona);
 
