@@ -1,10 +1,12 @@
-public class Promotions {
-    public final String serialNumber;
-    public final String itemOnPromo;
-    public final Double promoPrice;
-    public final Integer promoQty;
+import java.math.BigDecimal;
 
-    public Promotions(String serialNumber, String itemOnPromo, Double promoPrice, Integer promoQty) {
+class Promotions {
+    private final String serialNumber;
+    final String itemOnPromo;
+    final BigDecimal promoPrice;
+    final Integer promoQty;
+
+    Promotions(String serialNumber, String itemOnPromo, BigDecimal promoPrice, Integer promoQty) {
         this.serialNumber = serialNumber;
         this.itemOnPromo = itemOnPromo;
         this.promoPrice = promoPrice;
