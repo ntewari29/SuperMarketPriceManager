@@ -14,11 +14,6 @@ public class PriceManagerTest {
 
     private SuperMarket superMarket;
 
-    private Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5), 1, true);
-    private Inventory corona = new Inventory("2", "Corona", BigDecimal.valueOf(11.25), 3, true);
-    private Inventory bread = new Inventory("2", "Bread", BigDecimal.valueOf(12), 0, false);
-    private Inventory whisky = new Inventory("3", "Ardbeg", BigDecimal.valueOf(526), 1, false);
-
     @Before
     public void setUp() {
         superMarket = new SuperMarket();
