@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class SuperMarket {
         return inventoryList;
     }
 
-    public void addItem(Inventory inventory) {
+    public void addItemToInventory(Inventory inventory) {
         boolean serialNo = inventory.serialNumber != "" && inventory.serialNumber != null;
         if (serialNo && inventory.itemPrice > 0 && inventory.storeQty > 0 && inventory.itemPrice > 0) {
             inventoryList.add(inventory);
@@ -67,7 +68,6 @@ public class SuperMarket {
             return sb.toString();
         } else {
             if (receiptNo == 1) {
-                receiptNo++;
                 return ("--------------------\n" +
                         "|Receipt No.1      |\n" +
                         "|1. Milk   4 $5    |\n" +
@@ -76,6 +76,15 @@ public class SuperMarket {
                         "| Total: $ 45      |\n" +
                         "--------------------");
             }
+            receiptNo++;
+        }
+        return null;
+    }
+
+    public List<Cart> addItemsToTheCart(Inventory inventory, int qty) {
+        BigDecimal priceOfItem = BigDecimal.valueOf(0);
+        if (!inventory.itemName.isEmpty()){
+
         }
         return null;
     }

@@ -16,13 +16,11 @@ public class PriceManagerTest {
     Inventory bread = new Inventory("2", "Bread", 12d, 0, false);
     Inventory whisky = new Inventory("3", "Ardbeg", 526.0, 1, false);
 
-    int receiptNo = 1;
-
     public void initializeInventory() {
-        superMarket.addItem(milk);
-        superMarket.addItem(corona);
-        superMarket.addItem(bread);
-        superMarket.addItem(whisky);
+        superMarket.addItemToInventory(milk);
+        superMarket.addItemToInventory(corona);
+        superMarket.addItemToInventory(bread);
+        superMarket.addItemToInventory(whisky);
     }
 
     public void includePromotions() {
@@ -43,9 +41,9 @@ public class PriceManagerTest {
         Inventory garlic = new Inventory("","Garlic", 5.4, 1, false);
         Inventory moisturiser = new Inventory("2a","Moisturiser", -50.0, 10, false);
         Inventory pitabread = new Inventory("100","", 15d, 0, false);
-        superMarket.addItem(garlic);
-        superMarket.addItem(moisturiser);
-        superMarket.addItem(pitabread);
+        superMarket.addItemToInventory(garlic);
+        superMarket.addItemToInventory(moisturiser);
+        superMarket.addItemToInventory(pitabread);
         assertThat(superMarket.inventoryList, is(empty()));
     }
 
@@ -53,7 +51,7 @@ public class PriceManagerTest {
     public void intiateStoreInventoryAndAssertOnTheItemName() {
         Inventory milk = new Inventory("1", "Milk", 5.0, 1, false);
         List<Inventory> inventory = superMarket.initializeInventory();
-        superMarket.addItem(milk);
+        superMarket.addItemToInventory(milk);
         assertThat(inventory, is(asList(milk)));
     }
 
@@ -69,45 +67,37 @@ public class PriceManagerTest {
         Inventory milk = new Inventory("1", "Milk", 5.0, 1, false);
         Inventory corona = new Inventory("2", "Corona", 11.25, 1, false);
         Inventory whisky = new Inventory("3", "Ardbeg", 526.0, 1, false);
-        superMarket.addItem(milk);
-        superMarket.addItem(corona);
-        superMarket.addItem(whisky);
+        superMarket.addItemToInventory(milk);
+        superMarket.addItemToInventory(corona);
+        superMarket.addItemToInventory(whisky);
         assertThat(milk.itemPrice, is(5.0));
     }
 
     @Test
     public void calculateTotalValueOfItemsAddedToTheInventory() {
-        Inventory milk = new Inventory("1", "Milk", 5.0, 1, false);
-        Inventory corona = new Inventory("2", "Corona", 11.25, 1, false);
-        Inventory whisky = new Inventory("3", "Ardbeg", 526.0, 1, false);
-        Inventory bread = new Inventory("4", "Bread", 12.0, 1, false);
-        superMarket.addItem(milk);
-        superMarket.addItem(corona);
-        superMarket.addItem(whisky);
-        superMarket.addItem(bread);
+        initializeInventory();
+        superMarket.addItemsToTheCart(milk, 1);
+        superMarket.addItemsToTheCart(corona, 1);
+        superMarket.addItemsToTheCart(whisky, 1);
+        superMarket.addItemsToTheCart(bread, 1);
         assertThat(superMarket.totalValueOfCart(), is(554.25));
     }
 
     @Test
     public void totalNumberOfItemsInTheCart() {
-        Inventory milk = new Inventory("1", "Milk", 5.0, 1, false);
-        Inventory corona = new Inventory("2", "Corona", 11.25, 1, false);
-        Inventory whisky = new Inventory("3", "Ardbeg", 526.0, 1, false);
-        Inventory bread = new Inventory("4", "Bread", 12.0, 1, false);
-        superMarket.addItem(milk);
-        superMarket.addItem(corona);
-        superMarket.addItem(whisky);
-        superMarket.addItem(bread);
+        initializeInventory();
+        superMarket.addItemsToTheCart(milk, 1);
+        superMarket.addItemsToTheCart(corona, 1);
+        superMarket.addItemsToTheCart(whisky, 1);
+        superMarket.addItemsToTheCart(bread, 1);
         assertThat(superMarket.itemsInTheCart(), is(4));
     }
 
     @Test
     public void verifyPromotionsOnTheItemsAddedToTheCart() {
         includePromotions();
-        Inventory milk = new Inventory("1", "Milk", 5.0, 4, true);
-        Inventory corona = new Inventory("2", "Corona", 11.25, 3, true);
-        superMarket.addItem(milk);
-        superMarket.addItem(corona);
+        superMarket.addItemsToTheCart(milk, 4);
+        superMarket.addItemsToTheCart(corona, 3);
         assertThat(superMarket.totalValueOfCart(), is(45d));
     }
 
@@ -126,8 +116,8 @@ public class PriceManagerTest {
     @Test
     public void generateReceiptAfterCheckout() {
         includePromotions();
-        superMarket.addItem(milk);
-        superMarket.addItem(corona);
+        superMarket.addItemsToTheCart(milk, 4);
+        superMarket.addItemsToTheCart(corona, 3);
         assertThat(superMarket.generateReceipt(),
                 is("--------------------\n" +
                         "|Receipt No.1      |\n" +
@@ -136,5 +126,14 @@ public class PriceManagerTest {
                         "|   Promo Applied  |\n" +
                         "| Total: $ 45      |\n" +
                         "--------------------"));
+    }
+
+    @Test
+    public void generateMultipleReceiptsAfterCheckout() {
+        includePromotions();
+        superMarket.addItemsToTheCart(whisky, 2);
+        superMarket.addItemsToTheCart(bread, 1);
+        assertThat(superMarket.generateReceipt(),
+                is("")); //Add receipts
     }
 }
