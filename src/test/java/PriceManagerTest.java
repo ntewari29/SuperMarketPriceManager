@@ -13,8 +13,8 @@ public class PriceManagerTest {
 
     Inventory milk = new Inventory("1", "Milk", 5.0, 1, true);
     Inventory corona = new Inventory("2", "Corona", 11.25, 3, true);
-    Inventory bread = new Inventory("2", "Bread", 12d, 0, false);
-    Inventory whisky = new Inventory("3", "Ardbeg", 526.0, 1, false);
+    Inventory bread = new Inventory("3", "Bread", 12d, 1, false);
+    Inventory whisky = new Inventory("4", "Whisky", 526.0, 1, false);
 
     public void initializeInventory() {
         superMarket.addItemToInventory(milk);
@@ -38,9 +38,9 @@ public class PriceManagerTest {
 
     @Test
     public void checkThatItemsWithInvalidAttributesCannotBeAddedToTheCart() {
-        Inventory garlic = new Inventory("","Garlic", 5.4, 1, false);
-        Inventory moisturiser = new Inventory("2a","Moisturiser", -50.0, 10, false);
-        Inventory pitabread = new Inventory("100","", 15d, 0, false);
+        Inventory garlic = new Inventory("", "Garlic", 5.4, 1, false);
+        Inventory moisturiser = new Inventory("2a", "Moisturiser", -50.0, 10, false);
+        Inventory pitabread = new Inventory("100", "", 15d, 0, false);
         superMarket.addItemToInventory(garlic);
         superMarket.addItemToInventory(moisturiser);
         superMarket.addItemToInventory(pitabread);
@@ -74,30 +74,42 @@ public class PriceManagerTest {
     }
 
     @Test
-    public void calculateTotalValueOfItemsAddedToTheInventory() {
+    public void calculateTotalValueOfItemsAddedInTheCart() {
         initializeInventory();
-        superMarket.addItemsToTheCart(milk, 1);
-        superMarket.addItemsToTheCart(corona, 1);
-        superMarket.addItemsToTheCart(whisky, 1);
-        superMarket.addItemsToTheCart(bread, 1);
+        includePromotions();
+        Cart milk = new Cart("Milk", 1);
+        Cart corona = new Cart("Corona", 1);
+        Cart whisky = new Cart("Whisky", 1);
+        Cart bread = new Cart("Bread", 1);
+        superMarket.addItemsToTheCart(milk);
+        superMarket.addItemsToTheCart(corona);
+        superMarket.addItemsToTheCart(whisky);
+        superMarket.addItemsToTheCart(bread);
         assertThat(superMarket.totalValueOfCart(), is(554.25));
     }
 
     @Test
     public void totalNumberOfItemsInTheCart() {
         initializeInventory();
-        superMarket.addItemsToTheCart(milk, 1);
-        superMarket.addItemsToTheCart(corona, 1);
-        superMarket.addItemsToTheCart(whisky, 1);
-        superMarket.addItemsToTheCart(bread, 1);
+        Cart milk = new Cart("Milk", 1);
+        Cart corona = new Cart("Corona", 1);
+        Cart whisky = new Cart("Whisky", 1);
+        Cart bread = new Cart("Bread", 1);
+        superMarket.addItemsToTheCart(milk);
+        superMarket.addItemsToTheCart(corona);
+        superMarket.addItemsToTheCart(whisky);
+        superMarket.addItemsToTheCart(bread);
         assertThat(superMarket.itemsInTheCart(), is(4));
     }
 
     @Test
     public void verifyPromotionsOnTheItemsAddedToTheCart() {
+        initializeInventory();
         includePromotions();
-        superMarket.addItemsToTheCart(milk, 4);
-        superMarket.addItemsToTheCart(corona, 3);
+        Cart milk = new Cart("Milk", 4);
+        Cart corona = new Cart("Corona", 3);
+        superMarket.addItemsToTheCart(milk);
+        superMarket.addItemsToTheCart(corona);
         assertThat(superMarket.totalValueOfCart(), is(45d));
     }
 
@@ -111,29 +123,5 @@ public class PriceManagerTest {
                         "|                  |\n" +
                         "|                  |\n" +
                         "--------------------"));
-    }
-
-    @Test
-    public void generateReceiptAfterCheckout() {
-        includePromotions();
-        superMarket.addItemsToTheCart(milk, 4);
-        superMarket.addItemsToTheCart(corona, 3);
-        assertThat(superMarket.generateReceipt(),
-                is("--------------------\n" +
-                        "|Receipt No.1      |\n" +
-                        "|1. Milk   4 $5    |\n" +
-                        "|2. Corona 3 $11.25|\n" +
-                        "|   Promo Applied  |\n" +
-                        "| Total: $ 45      |\n" +
-                        "--------------------"));
-    }
-
-    @Test
-    public void generateMultipleReceiptsAfterCheckout() {
-        includePromotions();
-        superMarket.addItemsToTheCart(whisky, 2);
-        superMarket.addItemsToTheCart(bread, 1);
-        assertThat(superMarket.generateReceipt(),
-                is("")); //Add receipts
     }
 }
