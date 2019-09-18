@@ -1,58 +1,59 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SuperMarket {
-    List<Inventory> inventoryList = new ArrayList<>();
-    List<Promotions> promoList = new ArrayList<>();
-    Double cartPrice = 0d;
-    Double individualItemPrice = 0d;
-    Double promoPrice = 0d;
+class SuperMarket {
+    private List<Inventory> inventoryList = new ArrayList<>();
+    private List<Promotions> promoList = new ArrayList<>();
+    private BigDecimal cartPrice = BigDecimal.ZERO;
+    private BigDecimal individualItemPrice = BigDecimal.ZERO;
+    private BigDecimal promoPrice = BigDecimal.ZERO;
 
-    public List<Inventory> initializeInventory() {
+    List<Inventory> initializeInventory() {
         return inventoryList;
     }
 
-    public void addItem(Inventory inventory) {
-        if (inventory.itemPrice > 0 && inventory.storeQty > 0) {
+    void addItem(Inventory inventory) {
+        if (inventory.itemPrice.compareTo(BigDecimal.ZERO) > 0 && inventory.storeQty > 0) {
             inventoryList.add(inventory);
         }
     }
 
-    public void addPromo(Promotions promotions) {
-        if (promotions.promoPrice > 0 && promotions.promoQty > 0) {
+    void addPromo(Promotions promotions) {
+        if (promotions.promoPrice.compareTo(BigDecimal.ZERO) > 0 && promotions.promoQty > 0) {
             promoList.add(promotions);
         }
     }
 
-    public Double totalValueOfCart() {
-        for (int i = 0; i < inventoryList.size(); i++) {
-            if (inventoryList.get(i).hasPromotion) {
+    BigDecimal totalValueOfCart() {
+        for (Inventory inventory : inventoryList) {
+            if (inventory.hasPromotion) {
                 cartPrice = calculatePromotion();
             } else {
-                individualItemPrice = inventoryList.get(i).itemPrice;
-                cartPrice = cartPrice + individualItemPrice;
+                individualItemPrice = inventory.itemPrice;
+                cartPrice = cartPrice.add(individualItemPrice);
             }
         }
         return cartPrice;
     }
 
-    private Double calculatePromotion() {
-        cartPrice = 0d;  //This doesnt seem to be the correct implementation of the promotion calculation
+    private BigDecimal calculatePromotion() {
+        cartPrice = BigDecimal.ZERO;  //This doesnt seem to be the correct implementation of the promotion calculation
         for (int i = 0; i < inventoryList.size(); i++) {
             if (inventoryList.get(i).itemName.equals(promoList.get(i).itemOnPromo)) {
                 promoPrice = promoList.get(i).promoPrice;
-                cartPrice = cartPrice + promoPrice;
+                cartPrice = cartPrice.add(promoPrice);
             }
         }
-        System.out.printf("Promo Cart Price" + cartPrice);
+        System.out.print("Promo Cart Price" + cartPrice);
         return cartPrice;
     }
 
-    public Integer itemsInTheCart() {
+    Integer itemsInTheCart() {
         return inventoryList.size();
     }
 
-    public String generateReceipt() {
+    String generateReceipt() {
         return ("--------------------\n" +
                 "|Receipt No.1      |\n" +
                 "|1. Milk   4 $5    |\n" +

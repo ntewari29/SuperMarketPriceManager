@@ -1,13 +1,13 @@
-import java.util.List;
+import java.math.BigDecimal;
 
-public class Inventory {
-    public final String serialNumber;
-    public final String itemName;
-    public final Double itemPrice;
-    public final Integer storeQty;
-    public final Boolean hasPromotion;
+class Inventory {
+    private final String serialNumber;
+    final String itemName;
+    final BigDecimal itemPrice;
+    final Integer storeQty;
+    final Boolean hasPromotion;
 
-    public Inventory(String serialNumber, String itemName, Double itemPrice, Integer storeQty, Boolean hasPromotion) {
+    Inventory(String serialNumber, String itemName, BigDecimal itemPrice, Integer storeQty, Boolean hasPromotion) {
         this.serialNumber = serialNumber;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
