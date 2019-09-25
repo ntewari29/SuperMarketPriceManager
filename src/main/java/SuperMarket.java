@@ -17,7 +17,7 @@ public class SuperMarket {
     }
 
     public void addItemToInventory(Inventory inventory) {
-        boolean hasSerialNo = inventory.serialNumber != "" && inventory.serialNumber != null;
+        boolean hasSerialNo = (inventory.serialNumber != "" || inventory.serialNumber != null);
         if (hasSerialNo && inventory.itemPrice > 0 && inventory.storeQty > 0 && inventory.itemPrice > 0) {
             inventoryList.add(inventory);
         }
@@ -33,7 +33,7 @@ public class SuperMarket {
         cartPrice = 0d;
         for (int i = 0; i < myCart.size(); i++) {
             for (int j = 0; j < inventoryList.size(); j++) {
-                if (myCart.get(i).itemName == inventoryList.get(j).itemName) {
+                if (myCart.get(i).itemName.equals(inventoryList.get(j).itemName)) {
                         individualItemPrice = (inventoryList.get(j).itemPrice) * (myCart.get(i).qty);
                         cartPrice = cartPrice + individualItemPrice;
                     }
@@ -68,7 +68,7 @@ public class SuperMarket {
         }         return null;
     }
 
-    public void addItemsToTheCart(Cart cart) {
-        myCart.add(cart);
+    public void addItemsToTheCart(Inventory itemName, int qty) {
+        myCart.add(new Cart(itemName, qty));
     }
 }
