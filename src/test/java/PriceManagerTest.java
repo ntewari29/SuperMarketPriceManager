@@ -79,7 +79,7 @@ public class PriceManagerTest {
         superMarket.addItemToInventory(corona);
         superMarket.addItemToInventory(whisky);
 
-        assertEquals(BigDecimal.valueOf(5), milk.itemPrice);
+        assertEquals(BigDecimal.valueOf(5), milk.getItemPrice());
     }
 
     @Test

@@ -1,6 +1,5 @@
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 class SuperMarket {
@@ -14,14 +13,17 @@ class SuperMarket {
     }
 
     void addItemToInventory(Inventory inventory) {
-        boolean hasSerialNo = (inventory.serialNumber != "" || inventory.serialNumber != null);
-        if (hasSerialNo && inventory.itemPrice.compareTo(BigDecimal.ZERO) > 0 && inventory.storeQty > 0 && inventory.itemPrice.compareTo(BigDecimal.ZERO) > 0) {
+        String serialNumber = inventory.getSerialNumber();
+        boolean hasSerialNo = (serialNumber != null && !serialNumber.equals(""));
+        if (hasSerialNo
+                && inventory.getItemPrice().compareTo(BigDecimal.ZERO) > 0
+                && inventory.getStoreQty() > 0) {
             inventoryList.add(inventory);
         }
     }
 
     void addPromo(Promotions promotions) {
-        if (promotions.promoPrice.compareTo(BigDecimal.ZERO) > 0 && promotions.promoQty > 0) {
+        if (promotions.getPromoPrice().compareTo(BigDecimal.ZERO) > 0 && promotions.getPromoQty() > 0) {
             promoList.add(promotions);
         }
     }
@@ -30,8 +32,8 @@ class SuperMarket {
         cartPrice = BigDecimal.valueOf(0d);
         for (Cart cart : myCart) {
             for (Inventory inventory : inventoryList) {
-                if (cart.itemName.equals(inventory.itemName)) {
-                    BigDecimal individualItemPrice = inventory.itemPrice.multiply(BigDecimal.valueOf(cart.qty));
+                if (cart.getItem().getItemName().equals(inventory.getItemName())) {
+                    BigDecimal individualItemPrice = inventory.getItemPrice().multiply(BigDecimal.valueOf(cart.getQty()));
                     cartPrice = cartPrice.add(individualItemPrice);
                 }
             }
