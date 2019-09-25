@@ -4,12 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class SuperMarket {
-    List<Inventory> inventoryList = new ArrayList<>();
+
     List<Cart> myCart = new ArrayList<>();
+    List<Inventory> inventoryList = new ArrayList<>();
     List<Promotions> promoList = new ArrayList<>();
-    Double cartPrice = 0d;
-    Double individualItemPrice = 0d;
-    Double promoPrice = 0d;
+    BigDecimal cartPrice = BigDecimal.ZERO;
+    BigDecimal individualItemPrice = BigDecimal.ZERO;
+    BigDecimal promoPrice = BigDecimal.ZERO;
     int receiptNo = 1;
 
     public List<Inventory> initializeInventory() {
@@ -29,20 +30,20 @@ public class SuperMarket {
         }
     }
 
-    public Double totalValueOfCart() {
-        cartPrice = 0d;
+    public BigDecimal totalValueOfCart() {
+        cartPrice = BigDecimal.valueOf(0d);
         for (int i = 0; i < myCart.size(); i++) {
             for (int j = 0; j < inventoryList.size(); j++) {
                 if (myCart.get(i).itemName.equals(inventoryList.get(j).itemName)) {
-                        individualItemPrice = (inventoryList.get(j).itemPrice) * (myCart.get(i).qty);
-                        cartPrice = cartPrice + individualItemPrice;
+                        individualItemPrice = BigDecimal.valueOf((inventoryList.get(j).itemPrice) * (myCart.get(i).qty));
+                        cartPrice = cartPrice.add(individualItemPrice);
                     }
                 }
             }
         return cartPrice;
     }
 
-    private Double calculatePromotion() {
+    private BigDecimal calculatePromotion() {
         return cartPrice;
     }
 
