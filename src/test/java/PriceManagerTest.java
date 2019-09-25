@@ -90,7 +90,8 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(corona, 1);
         superMarket.addItemsToTheCart(whisky, 1);
         superMarket.addItemsToTheCart(bread, 1);
-        assertThat(superMarket.totalValueOfCart(), is(554.25));
+
+        assertEquals(BigDecimal.valueOf(554.25), superMarket.totalValueOfCart());
     }
 
     @Test
@@ -100,7 +101,8 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(corona, 1);
         superMarket.addItemsToTheCart(whisky, 1);
         superMarket.addItemsToTheCart(bread, 1);
-        assertThat(superMarket.itemsInTheCart(), is(4));
+
+        assertEquals(4, superMarket.itemsInTheCart());
     }
 
     /*@Test
