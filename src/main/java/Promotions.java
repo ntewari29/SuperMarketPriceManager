@@ -2,7 +2,7 @@ import java.math.BigDecimal;
 
 class Promotions {
     private final String serialNumber;
-    final String itemOnPromo;
+    private final String itemOnPromo;
     final BigDecimal promoPrice;
     final Integer promoQty;
 

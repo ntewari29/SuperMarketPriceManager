@@ -1,10 +1,8 @@
-import java.util.List;
+class Cart {
+    final Inventory itemName;
+    final int qty;
 
-public class Cart {
-    public final Inventory itemName;
-    public final int qty;
-
-    public Cart(Inventory itemName, Integer qty) {
+    Cart(Inventory itemName, Integer qty) {
         this.itemName = itemName;
         this.qty = qty;
     }

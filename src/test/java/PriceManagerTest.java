@@ -14,21 +14,21 @@ public class PriceManagerTest {
 
     private SuperMarket superMarket;
 
-    Inventory milk = new Inventory("1", "Milk", 5.0, 1, true);
-    Inventory corona = new Inventory("2", "Corona", 11.25, 3, true);
-    Inventory bread = new Inventory("3", "Bread", 12d, 1, false);
-    Inventory whisky = new Inventory("4", "Whisky", 526.0, 1, false);
-
-    public void initializeInventory() {
-        superMarket.addItemToInventory(milk);
-        superMarket.addItemToInventory(corona);
-        superMarket.addItemToInventory(bread);
-        superMarket.addItemToInventory(whisky);
-    }
+    private Inventory milk = new Inventory("1", "Milk",  BigDecimal.valueOf(5), 1, true);
+    private Inventory corona = new Inventory("2", "Corona",  BigDecimal.valueOf(11.25), 3, true);
+    private Inventory bread = new Inventory("3", "Bread",  BigDecimal.valueOf(12d), 1, false);
+    private Inventory whisky = new Inventory("4", "Whisky",  BigDecimal.valueOf(526), 1, false);
 
     @Before
     public void setUp() {
         superMarket = new SuperMarket();
+    }
+
+    private void initializeInventory() {
+        superMarket.addItemToInventory(milk);
+        superMarket.addItemToInventory(corona);
+        superMarket.addItemToInventory(bread);
+        superMarket.addItemToInventory(whisky);
     }
 
     private void includePromotions() {
@@ -46,13 +46,13 @@ public class PriceManagerTest {
 
     @Test
     public void checkThatItemsWithInvalidAttributesCannotBeAddedToTheCart() {
-        Inventory garlic = new Inventory("", "Garlic", 5.4, 1, false);
-        Inventory moisturiser = new Inventory("2a", "Moisturiser", -50.0, 10, false);
-        Inventory pitabread = new Inventory("100", "", 15d, 0, false);
+        Inventory garlic = new Inventory("", "Garlic", BigDecimal.valueOf(5.4), 1, false);
+        Inventory moisturiser = new Inventory("2a", "Moisturiser", BigDecimal.valueOf(-50), 10, false);
+        Inventory pitabread = new Inventory("100", "", BigDecimal.valueOf(15), 0, false);
         superMarket.addItemToInventory(garlic);
         superMarket.addItemToInventory(moisturiser);
         superMarket.addItemToInventory(pitabread);
-        assertThat(superMarket.inventoryList, is(empty()));
+        assertThat(superMarket.getInventoryList(), is(empty()));
     }
 
     @Test

@@ -8,9 +8,6 @@ class SuperMarket {
     private List<Inventory> inventoryList = new ArrayList<>();
     private List<Promotions> promoList = new ArrayList<>();
     private BigDecimal cartPrice = BigDecimal.ZERO;
-    private BigDecimal individualItemPrice = BigDecimal.ZERO;
-    private BigDecimal promoPrice = BigDecimal.ZERO;
-    int receiptNo = 1;
 
     List<Inventory> initializeInventory() {
         return inventoryList;
@@ -18,7 +15,7 @@ class SuperMarket {
 
     void addItemToInventory(Inventory inventory) {
         boolean hasSerialNo = (inventory.serialNumber != "" || inventory.serialNumber != null);
-        if (hasSerialNo && inventory.itemPrice.compareTo(BigDecimal.ZERO) > 0 && inventory.storeQty > 0 && inventory.itemPrice > 0) {
+        if (hasSerialNo && inventory.itemPrice.compareTo(BigDecimal.ZERO) > 0 && inventory.storeQty > 0 && inventory.itemPrice.compareTo(BigDecimal.ZERO) > 0) {
             inventoryList.add(inventory);
         }
     }
@@ -29,16 +26,16 @@ class SuperMarket {
         }
     }
 
-    public BigDecimal totalValueOfCart() {
+    BigDecimal totalValueOfCart() {
         cartPrice = BigDecimal.valueOf(0d);
-        for (int i = 0; i < myCart.size(); i++) {
-            for (int j = 0; j < inventoryList.size(); j++) {
-                if (myCart.get(i).itemName.equals(inventoryList.get(j).itemName)) {
-                        individualItemPrice = BigDecimal.valueOf((inventoryList.get(j).itemPrice) * (myCart.get(i).qty));
-                        cartPrice = cartPrice.add(individualItemPrice);
-                    }
+        for (Cart cart : myCart) {
+            for (Inventory inventory : inventoryList) {
+                if (cart.itemName.equals(inventory.itemName)) {
+                    BigDecimal individualItemPrice = inventory.itemPrice.multiply(BigDecimal.valueOf(cart.qty));
+                    cartPrice = cartPrice.add(individualItemPrice);
                 }
             }
+        }
         return cartPrice;
     }
 
@@ -50,11 +47,11 @@ class SuperMarket {
         return inventoryList.size();
     }
 
-    public Integer itemsInTheCart() {
+    int itemsInTheCart() {
         return myCart.size();
     }
 
-    public String generateReceipt() {
+    String generateReceipt() {
         if (inventoryList.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             String headAndtail = "--------------------";
@@ -68,7 +65,11 @@ class SuperMarket {
         }         return null;
     }
 
-    public void addItemsToTheCart(Inventory itemName, int qty) {
+    void addItemsToTheCart(Inventory itemName, int qty) {
         myCart.add(new Cart(itemName, qty));
+    }
+
+    List<Inventory> getInventoryList() {
+        return inventoryList;
     }
 }
