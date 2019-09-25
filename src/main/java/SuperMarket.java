@@ -3,29 +3,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SuperMarket {
-
-    List<Cart> myCart = new ArrayList<>();
-    List<Inventory> inventoryList = new ArrayList<>();
-    List<Promotions> promoList = new ArrayList<>();
-    BigDecimal cartPrice = BigDecimal.ZERO;
-    BigDecimal individualItemPrice = BigDecimal.ZERO;
-    BigDecimal promoPrice = BigDecimal.ZERO;
+class SuperMarket {
+    private List<Cart> myCart = new ArrayList<>();
+    private List<Inventory> inventoryList = new ArrayList<>();
+    private List<Promotions> promoList = new ArrayList<>();
+    private BigDecimal cartPrice = BigDecimal.ZERO;
+    private BigDecimal individualItemPrice = BigDecimal.ZERO;
+    private BigDecimal promoPrice = BigDecimal.ZERO;
     int receiptNo = 1;
 
-    public List<Inventory> initializeInventory() {
+    List<Inventory> initializeInventory() {
         return inventoryList;
     }
 
-    public void addItemToInventory(Inventory inventory) {
+    void addItemToInventory(Inventory inventory) {
         boolean hasSerialNo = (inventory.serialNumber != "" || inventory.serialNumber != null);
-        if (hasSerialNo && inventory.itemPrice > 0 && inventory.storeQty > 0 && inventory.itemPrice > 0) {
+        if (hasSerialNo && inventory.itemPrice.compareTo(BigDecimal.ZERO) > 0 && inventory.storeQty > 0 && inventory.itemPrice > 0) {
             inventoryList.add(inventory);
         }
     }
 
-    public void addPromo(Promotions promotions) {
-        if (promotions.promoPrice > 0 && promotions.promoQty > 0) {
+    void addPromo(Promotions promotions) {
+        if (promotions.promoPrice.compareTo(BigDecimal.ZERO) > 0 && promotions.promoQty > 0) {
             promoList.add(promotions);
         }
     }
