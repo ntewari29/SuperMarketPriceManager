@@ -37,7 +37,8 @@ class SuperMarket {
                 }
             }
         }
-        return cartPrice.subtract(calculatePromotion());
+        BigDecimal promotionValue = calculatePromotion();
+        return cartPrice.subtract(promotionValue);
     }
 
     int itemsInTheCart() {

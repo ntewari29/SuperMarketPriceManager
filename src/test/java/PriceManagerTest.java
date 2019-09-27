@@ -106,16 +106,36 @@ public class PriceManagerTest {
         assertThat(superMarket.itemsInTheCart()).isEqualTo(4);
     }
 
-    /*@Test
-    public void verifyPromotionsOnTheItemsAddedToTheCart() {
+    @Test
+    public void shouldPromotionValue() {
         initializeInventory();
         includePromotions();
-        Cart milk = new Cart("Milk", 4);
-        Cart corona = new Cart("Corona", 3);
-        superMarket.addItemsToTheCart(milk);
-        superMarket.addItemsToTheCart(corona);
-        assertThat(superMarket.totalValueOfCart(), is(45d));
-    }*/
+        superMarket.addItemsToTheCart(milk, 4);
+        superMarket.addItemsToTheCart(corona, 3);
+
+        assertThat(superMarket.totalValueOfCart()).isEqualByComparingTo(BigDecimal.valueOf(45));
+    }
+
+    @Test
+    public void shouldPromotionValueWhenQtyIsDoubled() {
+        initializeInventory();
+        includePromotions();
+        superMarket.addItemsToTheCart(milk, 8);
+        superMarket.addItemsToTheCart(corona, 6);
+
+        assertThat(superMarket.totalValueOfCart()).isEqualByComparingTo(BigDecimal.valueOf(90));
+    }
+
+    @Test
+    public void shouldPromotionValueWhenQtyIsLessThanNeeded() {
+        initializeInventory();
+        includePromotions();
+        superMarket.addItemsToTheCart(milk, 7);
+        superMarket.addItemsToTheCart(corona, 6);
+
+        assertThat(superMarket.totalValueOfCart()).isEqualByComparingTo(BigDecimal.valueOf(90));
+    }
+
     @Test
     public void blankReceiptWhenNoItemIsAddedToTheCart() {
         assertThat(superMarket.generateReceipt())
