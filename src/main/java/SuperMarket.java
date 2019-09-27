@@ -6,7 +6,6 @@ class SuperMarket {
     private List<Cart> myCart = new ArrayList<>();
     private List<Inventory> inventoryList = new ArrayList<>();
     private List<Promotions> promoList = new ArrayList<>();
-    private BigDecimal cartPrice = BigDecimal.ZERO;
 
     List<Inventory> initializeInventory() {
         return inventoryList;
@@ -29,7 +28,7 @@ class SuperMarket {
     }
 
     BigDecimal totalValueOfCart() {
-        cartPrice = BigDecimal.valueOf(0d);
+        BigDecimal cartPrice = BigDecimal.ZERO;
         for (Cart cart : myCart) {
             for (Inventory inventory : inventoryList) {
                 if (cart.getItem().getItemName().equals(inventory.getItemName())) {
@@ -38,15 +37,7 @@ class SuperMarket {
                 }
             }
         }
-        return cartPrice;
-    }
-
-    private BigDecimal calculatePromotion() {
-        return cartPrice;
-    }
-
-    public Integer itemsInTheInventory() {
-        return inventoryList.size();
+        return cartPrice.subtract(calculatePromotion());
     }
 
     int itemsInTheCart() {
@@ -64,7 +55,8 @@ class SuperMarket {
             }
             sb.append(headAndtail);
             return sb.toString();
-        }         return null;
+        }
+        return null;
     }
 
     void addItemsToTheCart(Inventory itemName, int qty) {
@@ -73,5 +65,30 @@ class SuperMarket {
 
     List<Inventory> getInventoryList() {
         return inventoryList;
+    }
+
+    private BigDecimal calculatePromotion() {
+        BigDecimal promotionValue = BigDecimal.ZERO;
+
+        for (Cart cart : myCart) {
+            for (Promotions promotion : promoList) {
+                Inventory item = cart.getItem();
+                if (item.getItemName().equals(promotion.getItemOnPromo())) {
+                    if (cart.getQty() >= promotion.getPromoQty()) {
+                        BigDecimal itemPrice = item.getItemPrice();
+                        BigDecimal promotionApplyTimes = BigDecimal.valueOf(cart.getQty() / promotion.getPromoQty());
+                        BigDecimal qtyWithoutPromoLeft = BigDecimal.valueOf(cart.getQty() % promotion.getPromoQty());
+
+                        BigDecimal priceWithoutDiscount = itemPrice.multiply(BigDecimal.valueOf(cart.getQty()));
+                        BigDecimal priceWithDiscount = promotion.getPromoPrice().multiply(promotionApplyTimes)
+                                .add(itemPrice.multiply(qtyWithoutPromoLeft));
+
+                        promotionValue = promotionValue.add(priceWithoutDiscount.subtract(priceWithDiscount));
+                    }
+                }
+            }
+        }
+
+        return promotionValue;
     }
 }
