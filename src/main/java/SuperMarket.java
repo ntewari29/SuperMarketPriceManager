@@ -1,8 +1,13 @@
+import lombok.val;
+
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 class SuperMarket {
+    public static final String paddedSpaces = "           ";
     private List<Cart> myCart = new ArrayList<>();
     private List<Inventory> inventoryList = new ArrayList<>();
     private List<Promotions> promoList = new ArrayList<>();
@@ -10,6 +15,20 @@ class SuperMarket {
     List<Inventory> initializeInventory() {
         return inventoryList;
     }
+
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    Date date = new Date();
+    String todaysDate = formatter.format(date);
+    StringBuilder sb = new StringBuilder();
+    String header = "\t\tSuperMarket Pricing Manager\n" +
+            "\t\t\t\t\t\tDate: " + todaysDate + "\n" +
+            "\n" +
+            "Item No.\tDescription\t\tQuantity\t\tTotal Price\n" +
+            "---------------------------------------------------------------";
+    String receiptClosure = "---------------------------------------------------------------";
+    String tailer = "\t\t\t\t\tGrand Total: $\n" +
+            "\t\t\t\t\t  You Saved: $\n" +
+            "\t\tThanks for Visting! Have a Nice Day";
 
     void addItemToInventory(Inventory inventory) {
         String serialNumber = inventory.getSerialNumber();
@@ -45,23 +64,39 @@ class SuperMarket {
         return myCart.size();
     }
 
-    String generateReceipt() {
+    String generateReceipt(List<Cart> myCart) {
+        int serialNo = 1;
         if (inventoryList.isEmpty()) {
-            StringBuilder sb = new StringBuilder();
-            String headAndtail = "--------------------";
-            String boundary = "|                  |";
-            sb.append(headAndtail + "\n");
-            for (int i = 0; i <= 4; i++) {
-                sb.append(boundary + "\n");
+            sb.append(header + "\n\n");
+            sb.append(receiptClosure + "\n");
+            sb.append(tailer);
+            return sb.toString();
+        } else {
+            sb.append(header + "\n");
+            for (Cart cart : myCart) {
+                val checkoutQty = cart.getQty();
+                sb.append(serialNo + paddedSpaces);
+                sb.append(cart.getItem().getItemName());
+                for (int i = cart.getItem().getItemName().length(); i < 16; i++) {
+                    sb.append(" ");
+                }
+                sb.append(checkoutQty);
+                sb.append("               5\n");
+                serialNo++;
             }
-            sb.append(headAndtail);
+            sb.append(receiptClosure + "\n");
+            sb.append(tailer);
             return sb.toString();
         }
-        return null;
     }
 
     void addItemsToTheCart(Inventory itemName, int qty) {
         myCart.add(new Cart(itemName, qty));
+    }
+
+    List<Cart> getMyCart() {
+        System.out.println(myCart);
+        return myCart;
     }
 
     List<Inventory> getInventoryList() {
@@ -89,7 +124,6 @@ class SuperMarket {
                 }
             }
         }
-
         return promotionValue;
     }
 }
