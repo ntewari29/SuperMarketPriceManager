@@ -11,6 +11,9 @@ class SuperMarket {
     private List<Cart> myCart = new ArrayList<>();
     private List<Inventory> inventoryList = new ArrayList<>();
     private List<Promotions> promoList = new ArrayList<>();
+    BigDecimal priceWithoutDiscount = null;
+    Inventory inventory;
+    Cart cart;
 
     List<Inventory> initializeInventory() {
         return inventoryList;
@@ -29,6 +32,7 @@ class SuperMarket {
     String tailer = "\t\t\t\t\tGrand Total: $\n" +
             "\t\t\t\t\t  You Saved: $\n" +
             "\t\tThanks for Visting! Have a Nice Day";
+
 
     void addItemToInventory(Inventory inventory) {
         String serialNumber = inventory.getSerialNumber();
@@ -81,12 +85,18 @@ class SuperMarket {
                     sb.append(" ");
                 }
                 sb.append(checkoutQty);
-                sb.append("               5\n");
+                sb.append("               " + priceWithoutDiscount + "\n");
                 serialNo++;
             }
             sb.append(receiptClosure + "\n");
             sb.append(tailer);
             return sb.toString();
+        }
+    }
+
+    void itemPrice() {
+        if (cart.getItem().getItemName() == inventory.getItemName()) {
+            priceWithoutDiscount = inventory.getItemPrice().multiply(BigDecimal.valueOf(cart.getQty()));
         }
     }
 
