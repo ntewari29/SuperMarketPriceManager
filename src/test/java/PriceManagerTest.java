@@ -11,10 +11,10 @@ public class PriceManagerTest {
 
     private SuperMarket superMarket;
 
-    private Inventory milk = new Inventory("1", "Milk",  BigDecimal.valueOf(5), 1, true);
-    private Inventory corona = new Inventory("2", "Corona",  BigDecimal.valueOf(11.25), 3, true);
-    private Inventory bread = new Inventory("3", "Bread",  BigDecimal.valueOf(12d), 1, false);
-    private Inventory whisky = new Inventory("4", "Whisky",  BigDecimal.valueOf(526), 1, false);
+    private Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5), 1, true);
+    private Inventory corona = new Inventory("2", "Corona", BigDecimal.valueOf(11.25), 3, true);
+    private Inventory bread = new Inventory("3", "Bread", BigDecimal.valueOf(12d), 1, false);
+    private Inventory whisky = new Inventory("4", "Whisky", BigDecimal.valueOf(526), 1, false);
 
     @Before
     public void setUp() {
@@ -91,14 +91,13 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(corona, 1);
         superMarket.addItemsToTheCart(whisky, 1);
         superMarket.addItemsToTheCart(bread, 1);
-
         assertThat(superMarket.totalValueOfCart()).isEqualTo(BigDecimal.valueOf(554.25));
     }
 
     @Test
     public void totalNumberOfItemsInTheCart() {
         initializeInventory();
-        superMarket.addItemsToTheCart(milk,1);
+        superMarket.addItemsToTheCart(milk, 1);
         superMarket.addItemsToTheCart(corona, 1);
         superMarket.addItemsToTheCart(whisky, 1);
         superMarket.addItemsToTheCart(bread, 1);
@@ -138,14 +137,63 @@ public class PriceManagerTest {
 
     @Test
     public void blankReceiptWhenNoItemIsAddedToTheCart() {
-        assertThat(superMarket.generateReceipt())
+        assertThat(superMarket.generateReceipt(superMarket.getMyCart()))
                 .isEqualTo(
-                        "--------------------\n" +
-                        "|                  |\n" +
-                        "|                  |\n" +
-                        "|                  |\n" +
-                        "|                  |\n" +
-                        "|                  |\n" +
-                        "--------------------");
+                        "\t\tSuperMarket Pricing Manager\n" +
+                                "\t\t\t\t\t\tDate: " + superMarket.todaysDate + "\n" +
+                                "\n" +
+                                "Item No.\tDescription\t\tQuantity\t\tTotal Price\n" +
+                                "---------------------------------------------------------------\n" +
+                                "\n" +
+                                "---------------------------------------------------------------\n" +
+                                "\t\t\t\t\tGrand Total: $\n" +
+                                "\t\t\t\t\t  You Saved: $\n" +
+                                "\t\tThanks for Visting! Have a Nice Day");
+    }
+
+    @Test
+    public void addItemsToTheCartAndCheckoutToVerifyTheReceipt() {
+        initializeInventory();
+        superMarket.addItemsToTheCart(milk, 1);
+        superMarket.addItemsToTheCart(corona, 1);
+        superMarket.addItemsToTheCart(whisky, 1);
+        superMarket.addItemsToTheCart(bread, 1);
+
+        assertThat(superMarket.generateReceipt(superMarket.getMyCart()))
+                .isEqualTo(
+"\t\tSuperMarket Pricing Manager\n" +
+        "\t\t\t\t\t\tDate: "+ superMarket.todaysDate +"\n" +
+        "\n" +
+        "Item No.\tDescription\tQuantity\t\tTotal Price\n" +
+        "---------------------------------------------------------------\n" +
+        "1           Milk            1               5\n" +
+        "2           Corona          1               11.25\n" +
+        "4           Whisky          1               526\n" +
+        "3           Bread           1               12\n" +
+        "---------------------------------------------------------------\n" +
+        "\t\t\t\t\tGrand Total: $  554.25\n" +
+        "\t\t\t\t\t  You Saved: $  0\n" +
+        "\t\tThanks for Visting! Have a Nice Day");
+    }
+
+    @Test
+    public void secondCustomerCheckoutsTheCartVerifyReceiptGenerationAfterCheckout() {
+        initializeInventory();
+        superMarket.addItemsToTheCart(milk, 4);
+        superMarket.addItemsToTheCart(bread, 2);
+
+        assertThat(superMarket.generateReceipt(superMarket.getMyCart()))
+                .isEqualTo(
+"\t\tSuperMarket Pricing Manager\n" +
+        "\t\t\t\t\t\tDate: "+ superMarket.todaysDate +"\n" +
+        "\n" +
+        "Item No.\tDescription\tQuantity\t\tTotal Price\n" +
+        "---------------------------------------------------------------\n" +
+        "1           Milk            4               20\n" +
+        "3           Bread           2               24\n" +
+        "---------------------------------------------------------------\n" +
+        "\t\t\t\t\tGrand Total: $  44\n" +
+        "\t\t\t\t\t  You Saved: $  0\n" +
+        "\t\tThanks for Visting! Have a Nice Day");
     }
 }
