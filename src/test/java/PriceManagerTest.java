@@ -11,10 +11,10 @@ public class PriceManagerTest {
 
     private SuperMarket superMarket;
 
-    private Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5), 1, true);
+    private Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5d), 1, true);
     private Inventory corona = new Inventory("2", "Corona", BigDecimal.valueOf(11.25), 3, true);
     private Inventory bread = new Inventory("3", "Bread", BigDecimal.valueOf(12d), 1, false);
-    private Inventory whisky = new Inventory("4", "Whisky", BigDecimal.valueOf(526), 1, false);
+    private Inventory whisky = new Inventory("4", "Whisky", BigDecimal.valueOf(526d), 1, false);
 
     @Before
     public void setUp() {
@@ -166,9 +166,9 @@ public class PriceManagerTest {
                                 "\n" +
                                 "Item No.\tDescription\t\tQuantity\t\tTotal Price\n" +
                                 "---------------------------------------------------------------\n" +
-                                "1           Milk            1               5\n" +
+                                "1           Milk            1               5.0\n" +
                                 "2           Corona          1               11.25\n" +
-                                "4           Whisky          1               526\n" +
+                                "4           Whisky          1               526.0\n" +
                                 "3           Bread           1               12.0\n" +
                                 "---------------------------------------------------------------\n" +
                                 "\t\t\t\t\tGrand Total: $  554.25\n" +
@@ -189,7 +189,7 @@ public class PriceManagerTest {
                                 "\n" +
                                 "Item No.\tDescription\t\tQuantity\t\tTotal Price\n" +
                                 "---------------------------------------------------------------\n" +
-                                "1           Milk            4               20\n" +
+                                "1           Milk            4               20.0\n" +
                                 "3           Bread           2               24.0\n" +
                                 "---------------------------------------------------------------\n" +
                                 "\t\t\t\t\tGrand Total: $  44.0\n" +
