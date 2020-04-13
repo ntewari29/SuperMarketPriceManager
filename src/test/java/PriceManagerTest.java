@@ -161,19 +161,19 @@ public class PriceManagerTest {
 
         assertThat(superMarket.generateReceipt(superMarket.getMyCart()))
                 .isEqualTo(
-"\t\tSuperMarket Pricing Manager\n" +
-        "\t\t\t\t\t\tDate: "+ superMarket.todaysDate +"\n" +
-        "\n" +
-        "Item No.\tDescription\tQuantity\t\tTotal Price\n" +
-        "---------------------------------------------------------------\n" +
-        "1           Milk            1               5\n" +
-        "2           Corona          1               11.25\n" +
-        "4           Whisky          1               526\n" +
-        "3           Bread           1               12\n" +
-        "---------------------------------------------------------------\n" +
-        "\t\t\t\t\tGrand Total: $  554.25\n" +
-        "\t\t\t\t\t  You Saved: $  0\n" +
-        "\t\tThanks for Visting! Have a Nice Day");
+                        "\t\tSuperMarket Pricing Manager\n" +
+                                "\t\t\t\t\t\tDate: " + superMarket.todaysDate + "\n" +
+                                "\n" +
+                                "Item No.\tDescription\t\tQuantity\t\tTotal Price\n" +
+                                "---------------------------------------------------------------\n" +
+                                "1           Milk            1               5\n" +
+                                "2           Corona          1               11.25\n" +
+                                "4           Whisky          1               526\n" +
+                                "3           Bread           1               12.0\n" +
+                                "---------------------------------------------------------------\n" +
+                                "\t\t\t\t\tGrand Total: $  554.25\n" +
+                                "\t\t\t\t\t  You Saved: $  0\n" +
+                                "\t\tThanks for Visting! Have a Nice Day");
     }
 
     @Test
@@ -184,16 +184,16 @@ public class PriceManagerTest {
 
         assertThat(superMarket.generateReceipt(superMarket.getMyCart()))
                 .isEqualTo(
-"\t\tSuperMarket Pricing Manager\n" +
-        "\t\t\t\t\t\tDate: "+ superMarket.todaysDate +"\n" +
-        "\n" +
-        "Item No.\tDescription\tQuantity\t\tTotal Price\n" +
-        "---------------------------------------------------------------\n" +
-        "1           Milk            4               20\n" +
-        "3           Bread           2               24\n" +
-        "---------------------------------------------------------------\n" +
-        "\t\t\t\t\tGrand Total: $  44\n" +
-        "\t\t\t\t\t  You Saved: $  0\n" +
-        "\t\tThanks for Visting! Have a Nice Day");
+                        "\t\tSuperMarket Pricing Manager\n" +
+                                "\t\t\t\t\t\tDate: " + superMarket.todaysDate + "\n" +
+                                "\n" +
+                                "Item No.\tDescription\t\tQuantity\t\tTotal Price\n" +
+                                "---------------------------------------------------------------\n" +
+                                "1           Milk            4               20\n" +
+                                "3           Bread           2               24.0\n" +
+                                "---------------------------------------------------------------\n" +
+                                "\t\t\t\t\tGrand Total: $  44.0\n" +
+                                "\t\t\t\t\t  You Saved: $  0\n" +
+                                "\t\tThanks for Visting! Have a Nice Day");
     }
 }
