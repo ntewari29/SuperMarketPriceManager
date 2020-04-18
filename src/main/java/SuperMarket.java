@@ -32,7 +32,7 @@ class SuperMarket {
     String grandTotal = "\t\t\t\t\tGrand Total: $";
     String savings = "\t\t\t\t\t  You Saved: $";
     String tailer = "\t\tThanks for Visting! Have a Nice Day";
-    BigDecimal promotionValue = BigDecimal.ZERO;
+    BigDecimal promotionValue;
 
     void addItemToInventory(Inventory inventory) {
         String serialNumber = inventory.getSerialNumber();
@@ -69,7 +69,7 @@ class SuperMarket {
     }
 
     String generateReceipt(List<Cart> myCart) {
-        int serialNo = 1;
+        BigDecimal itemPrice;
         if (inventoryList.isEmpty()) {
             sb.append(header + "\n\n");
             sb.append(receiptClosure + "\n");
@@ -88,19 +88,25 @@ class SuperMarket {
                     sb.append(" ");
                 }
                 sb.append(checkoutQty);
-                if (promoList.isEmpty()) {
-                    sb.append("               " + cart.getItem().getItemPrice().multiply(BigDecimal.valueOf(cart.getQty())) + "\n");
-                } else {
-                    sb.append("               " + cart.getItem().getItemPrice().multiply(BigDecimal.valueOf(cart.getQty())).subtract(calculatePromotion()) + "\n");
+                for (Promotions promotions : promoList) {
+                    if (promotions.getItemOnPromo().equals(cart.getItem().getItemName()) && promotions.getPromoQty().equals(cart.getQty())) {
+                        itemPrice = cart.getItem().getItemPrice().multiply(BigDecimal.valueOf(cart.getQty())).subtract(calculatePromotion());
+                        sb.append("               " + itemPrice + "\n");
+                        break;
+                    }
+                    else if (!promotions.getItemOnPromo().equals(cart.getItem().getItemName()) && !promotions.getPromoQty().equals(cart.getQty())) {
+                        itemPrice = cart.getItem().getItemPrice().multiply(BigDecimal.valueOf(cart.getQty()));
+                        sb.append("               " + itemPrice + "\n");
+                        break;
+                    }
                 }
-                serialNo++;
             }
-            sb.append(receiptClosure + "\n");
-            sb.append(grandTotal + "  " + totalValueOfCart() + "\n");
-            sb.append(savings + "  " + calculatePromotion() + "\n");
-            sb.append(tailer);
-            return sb.toString();
         }
+        sb.append(receiptClosure + "\n");
+        sb.append(grandTotal + "  " + totalValueOfCart() + "\n");
+        sb.append(savings + "  " + calculatePromotion() + "\n");
+        sb.append(tailer);
+        return sb.toString();
     }
 
     void addItemsToTheCart(Inventory itemName, int qty) {
@@ -117,6 +123,7 @@ class SuperMarket {
     }
 
     private BigDecimal calculatePromotion() {
+        promotionValue = BigDecimal.ZERO;
         for (Cart cart : myCart) {
             for (Promotions promotion : promoList) {
                 Inventory item = cart.getItem();
