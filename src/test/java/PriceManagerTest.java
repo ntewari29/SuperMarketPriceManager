@@ -29,8 +29,8 @@ public class PriceManagerTest {
     }
 
     private void includePromotions() {
-        Promotions milk = new Promotions("1", "Milk", BigDecimal.valueOf(15), 4);
-        Promotions corona = new Promotions("2", "Corona", BigDecimal.valueOf(30), 3);
+        Promotions milk = new Promotions("1", "Milk", BigDecimal.valueOf(15d), 4);
+        Promotions corona = new Promotions("2", "Corona", BigDecimal.valueOf(30d), 3);
         superMarket.addPromo(milk);
         superMarket.addPromo(corona);
     }
@@ -158,7 +158,7 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(corona, 1);
         superMarket.addItemsToTheCart(whisky, 1);
         superMarket.addItemsToTheCart(bread, 1);
-
+        includePromotions();
         assertThat(superMarket.generateReceipt(superMarket.getMyCart()))
                 .isEqualTo(
                         "\t\tSuperMarket Pricing Manager\n" +
@@ -181,7 +181,7 @@ public class PriceManagerTest {
         initializeInventory();
         superMarket.addItemsToTheCart(milk, 4);
         superMarket.addItemsToTheCart(bread, 2);
-
+        includePromotions();
         assertThat(superMarket.generateReceipt(superMarket.getMyCart()))
                 .isEqualTo(
                         "\t\tSuperMarket Pricing Manager\n" +
@@ -189,11 +189,11 @@ public class PriceManagerTest {
                                 "\n" +
                                 "Item No.\tDescription\t\tQuantity\t\tTotal Price\n" +
                                 "---------------------------------------------------------------\n" +
-                                "1           Milk            4               20.0\n" +
+                                "1           Milk            4               15.0\n" +
                                 "3           Bread           2               24.0\n" +
                                 "---------------------------------------------------------------\n" +
-                                "\t\t\t\t\tGrand Total: $  44.0\n" +
-                                "\t\t\t\t\t  You Saved: $  0\n" +
+                                "\t\t\t\t\tGrand Total: $  39.0\n" +
+                                "\t\t\t\t\t  You Saved: $  5.0\n" +
                                 "\t\tThanks for Visting! Have a Nice Day");
     }
 }
