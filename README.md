@@ -1,3 +1,6 @@
+# SuperMarket PriceManager
+Supermarket Price Manager is a tool aimed at providing retailers and multi-channel merchants with a competitive price manager. The software is designed following the TDD principles and are onboard CI/CD pipeline. 
+
 # How to start working on SuperMarketPriceManager?
 1. Fork and Clone the repo.
    
