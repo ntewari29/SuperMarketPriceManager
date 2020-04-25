@@ -1,4 +1,4 @@
-# SuperMarket Price Manager  [![Generic badge](https://img.shields.io/badge/Version-1.0-Green.svg)](https://shields.io/) [![Build Status](https://travis-ci.org/ntewari29/SuperMarketPriceManager.svg?branch=master)](https://travis-ci.org/ntewari29/SuperMarketPriceManager)
+# SuperMarket Price Manager  [![Generic badge](https://img.shields.io/badge/Version-1.0-Green.svg)](https://shields.io/) [![Build Status](https://travis-ci.org/ntewari29/SuperMarketPriceManager.svg?branch=master)](https://travis-ci.org/ntewari29/SuperMarketPriceManager) [![Website supermarket.github.io](https://img.shields.io/website-up-down-green-red/https/ntewari29.github.io.svg)](https://ntewari29.github.io/SuperMarketPriceManager/)
 Supermarket Price Manager is a tool aimed at providing retailers and multi-channel merchants with a competitive price manager. The software is designed following the TDD principles and are onboarded onto a CI/CD pipeline. 
 
 # How to start working on SuperMarketPriceManager?
