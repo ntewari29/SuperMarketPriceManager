@@ -114,7 +114,6 @@ class SuperMarket {
     }
 
     List<Cart> getMyCart() {
-        System.out.println(myCart);
         return myCart;
     }
 
