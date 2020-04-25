@@ -1,5 +1,5 @@
 # SuperMarket PriceManager  [![Build Status](https://travis-ci.org/ntewari29/SuperMarketPriceManager.svg?branch=master)](https://travis-ci.org/ntewari29/SuperMarketPriceManager)
-Supermarket Price Manager is a tool aimed at providing retailers and multi-channel merchants with a competitive price manager. The software is designed following the TDD principles and are onboard CI/CD pipeline. 
+Supermarket Price Manager is a tool aimed at providing retailers and multi-channel merchants with a competitive price manager. The software is designed following the TDD principles and are onboarded onto a CI/CD pipeline. 
 
 # How to start working on SuperMarketPriceManager?
 1. Fork and Clone the repo.
