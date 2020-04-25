@@ -23,5 +23,4 @@ The following sequence of steps is generally followed:
 5. Refactor code
 6. Repeat
 
-[![Build Status](https://travis-ci.org/ntewari29/SuperMarketPriceManager/)]
-(https://travis-ci.org/travis-ci/travis-web)
+[![Build Status](https://travis-ci.org/ntewari29/SuperMarketPriceManager.svg?branch=master)](https://travis-ci.org/ntewari29/SuperMarketPriceManager)
