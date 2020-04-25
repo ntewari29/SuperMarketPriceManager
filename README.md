@@ -1,5 +1,4 @@
 # How to start working on SuperMarketPriceManager?
-https://img.shields.io/github/issues/ntewari29/SuperMarketPriceManager https://img.shields.io/github/forks/ntewari29/SuperMarketPriceManager https://img.shields.io/badge/version-1.0-orange ?logo=travis /pypi/l/:SuperMarketPriceManager
 1. Fork and Clone the repo.
    
    a. git clone git@github.com:ntewari29/SuperMarketPriceManager.git
