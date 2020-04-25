@@ -5,16 +5,19 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 
-public class PriceManagerTest {
+
+public class SuperMarketTests {
 
     private SuperMarket superMarket;
 
-    private Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5d), 1, true);
-    private Inventory corona = new Inventory("2", "Corona", BigDecimal.valueOf(11.25), 3, true);
-    private Inventory bread = new Inventory("3", "Bread", BigDecimal.valueOf(12d), 1, false);
-    private Inventory whisky = new Inventory("4", "Whisky", BigDecimal.valueOf(526d), 1, false);
+    private Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5d), 200, true);
+    private Inventory corona = new Inventory("2", "Corona", BigDecimal.valueOf(11.25), 300, true);
+    private Inventory bread = new Inventory("3", "Bread", BigDecimal.valueOf(12d), 50, false);
+    private Inventory whisky = new Inventory("4", "Whisky", BigDecimal.valueOf(526d), 70, false);
 
     @Before
     public void setUp() {
@@ -38,7 +41,7 @@ public class PriceManagerTest {
     @Test
     public void checkTheStoreInventory() {
         List<Inventory> inventory = superMarket.initializeInventory();
-        assertThat(inventory).isEmpty();
+        assertThat(inventory,is(empty()));
     }
 
     @Test
@@ -51,7 +54,7 @@ public class PriceManagerTest {
         superMarket.addItemToInventory(moisturiser);
         superMarket.addItemToInventory(pitabread);
 
-        assertThat(superMarket.getInventoryList()).isEmpty();
+        assertThat(superMarket.getInventoryList(), is(empty()));
     }
 
     @Test
@@ -60,15 +63,15 @@ public class PriceManagerTest {
         List<Inventory> inventory = superMarket.initializeInventory();
         superMarket.addItemToInventory(milk);
 
-        assertThat(inventory).isEqualTo(Collections.singletonList(milk));
+        assertThat(inventory,is(Collections.singletonList(milk)));
     }
 
     @Test
     public void verifyThatItemsWithValidPriceCanBeAddedToTheInventory() {
         List<Inventory> inventory = superMarket.initializeInventory();
 
-        assertThat(inventory).as("Invalid Price of the order being added to the Inventory").isEmpty();
-        assertThat(inventory).as("Invalid Qty of the order being added to the Inventory").isEmpty();
+        assertThat(inventory,is(empty()));
+        assertThat(inventory,is(empty()));
     }
 
     @Test
@@ -80,7 +83,7 @@ public class PriceManagerTest {
         superMarket.addItemToInventory(corona);
         superMarket.addItemToInventory(whisky);
 
-        assertThat(milk.getItemPrice()).isEqualTo(BigDecimal.valueOf(5));
+        assertThat(milk.getItemPrice(),is(BigDecimal.valueOf(5)));
     }
 
     @Test
@@ -91,7 +94,7 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(corona, 1);
         superMarket.addItemsToTheCart(whisky, 1);
         superMarket.addItemsToTheCart(bread, 1);
-        assertThat(superMarket.totalValueOfCart()).isEqualTo(BigDecimal.valueOf(554.25));
+        assertThat(superMarket.totalValueOfCart(),is(BigDecimal.valueOf(554.25)));
     }
 
     @Test
@@ -102,7 +105,7 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(whisky, 1);
         superMarket.addItemsToTheCart(bread, 1);
 
-        assertThat(superMarket.itemsInTheCart()).isEqualTo(4);
+        assertThat(superMarket.itemsInTheCart(), is(4));
     }
 
     @Test
@@ -112,7 +115,7 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(milk, 4);
         superMarket.addItemsToTheCart(corona, 3);
 
-        assertThat(superMarket.totalValueOfCart()).isEqualByComparingTo(BigDecimal.valueOf(45));
+        assertThat(superMarket.totalValueOfCart(), is(BigDecimal.valueOf(45.00).setScale(2)));
     }
 
     @Test
@@ -122,7 +125,7 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(milk, 8);
         superMarket.addItemsToTheCart(corona, 6);
 
-        assertThat(superMarket.totalValueOfCart()).isEqualByComparingTo(BigDecimal.valueOf(90));
+        assertThat(superMarket.totalValueOfCart(),is(BigDecimal.valueOf(90).setScale(2)));
     }
 
     @Test
@@ -132,13 +135,13 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(milk, 7);
         superMarket.addItemsToTheCart(corona, 6);
 
-        assertThat(superMarket.totalValueOfCart()).isEqualByComparingTo(BigDecimal.valueOf(90));
+        assertThat(superMarket.totalValueOfCart(),is(BigDecimal.valueOf(90).setScale(2)));
     }
 
     @Test
     public void blankReceiptWhenNoItemIsAddedToTheCart() {
-        assertThat(superMarket.generateReceipt(superMarket.getMyCart()))
-                .isEqualTo(
+        assertThat(superMarket.generateReceipt(superMarket.getMyCart())
+                ,is(
                         "\t\tSuperMarket Pricing Manager\n" +
                                 "\t\t\t\t\t\tDate: " + superMarket.todaysDate + "\n" +
                                 "\n" +
@@ -148,7 +151,7 @@ public class PriceManagerTest {
                                 "---------------------------------------------------------------\n" +
                                 "\t\t\t\t\tGrand Total: $\n" +
                                 "\t\t\t\t\t  You Saved: $\n" +
-                                "\t\tThanks for Visting! Have a Nice Day");
+                                "\t\tThanks for Visting! Have a Nice Day"));
     }
 
     @Test
@@ -159,8 +162,8 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(whisky, 1);
         superMarket.addItemsToTheCart(bread, 1);
         includePromotions();
-        assertThat(superMarket.generateReceipt(superMarket.getMyCart()))
-                .isEqualTo(
+        assertThat(superMarket.generateReceipt(superMarket.getMyCart())
+                ,is(
                         "\t\tSuperMarket Pricing Manager\n" +
                                 "\t\t\t\t\t\tDate: " + superMarket.todaysDate + "\n" +
                                 "\n" +
@@ -173,7 +176,7 @@ public class PriceManagerTest {
                                 "---------------------------------------------------------------\n" +
                                 "\t\t\t\t\tGrand Total: $  554.25\n" +
                                 "\t\t\t\t\t  You Saved: $  0\n" +
-                                "\t\tThanks for Visting! Have a Nice Day");
+                                "\t\tThanks for Visting! Have a Nice Day"));
     }
 
     @Test
@@ -182,8 +185,8 @@ public class PriceManagerTest {
         superMarket.addItemsToTheCart(milk, 4);
         superMarket.addItemsToTheCart(bread, 2);
         includePromotions();
-        assertThat(superMarket.generateReceipt(superMarket.getMyCart()))
-                .isEqualTo(
+        assertThat(superMarket.generateReceipt(superMarket.getMyCart())
+                ,is(
                         "\t\tSuperMarket Pricing Manager\n" +
                                 "\t\t\t\t\t\tDate: " + superMarket.todaysDate + "\n" +
                                 "\n" +
@@ -194,6 +197,14 @@ public class PriceManagerTest {
                                 "---------------------------------------------------------------\n" +
                                 "\t\t\t\t\tGrand Total: $  39.0\n" +
                                 "\t\t\t\t\t  You Saved: $  5.0\n" +
-                                "\t\tThanks for Visting! Have a Nice Day");
+                                "\t\tThanks for Visting! Have a Nice Day"));
     }
+
+/*
+    @Test
+    public void customersCannotAddMoreQtyToTheCartThenTheAvailableInventory() {
+        initializeInventory();
+        assertThat(superMarket.addItemsToTheCart(milk, 300),is(true));
+    }
+*/
 }
