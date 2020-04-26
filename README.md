@@ -1,16 +1,22 @@
 # SuperMarket Price Manager [![Generic badge](https://img.shields.io/badge/Version-1.0-Green.svg)](https://github.com/ntewari29/SuperMarketPriceManager) [![Build Status](https://travis-ci.org/ntewari29/SuperMarketPriceManager.svg?branch=master)](https://travis-ci.org/ntewari29/SuperMarketPriceManager) [![Website https://ntewari29.github.io/SuperMarketPriceManager/](https://img.shields.io/website-up-down-green-red/https/ntewari29.github.io/SuperMarketPriceManager/)](https://ntewari29.github.io/SuperMarketPriceManager/) [![GitHub forks](https://img.shields.io/github/forks/Naereen/StrapDown.js.svg?style=social&label=Fork&maxAge=2592000)](https://github.com/ntewari29/SuperMarketPriceManager/network)
 Supermarket Price Manager is a tool aimed at providing retailers and multi-channel merchants with a competitive price manager. The software is designed following the TDD principles and are onboarded onto a CI/CD pipeline. 
 
-# Introduction
-Super Market Price Manager enables retailers and multi-channel merchants to manage their inventory and offer competitive price, the software is one stop shop for all your pricing needs and offers its users a view to ensure that the functionality is intact by means of a CI pipeline.
+### Introduction
+The Price Manager is designed to enable retailers and multi-channel merchants to manage their inventory and offer competitive price, the software is one stop shop for all your pricing needs and offers its users a view to ensure that the functionality is intact by means of a CI pipeline.
 
-## Features Offered
-   a. TBU
+### Features Offered
+   a. Inventory Management
+   
+   b. Purchase Management
+   
+   c. Receipt Generation
+   
+   d. More........
 
 # How to start working on SuperMarketPriceManager?
 1. Fork and Clone the repo.
    
-   a. git clone git@github.com:ntewari29/SuperMarketPriceManager.git
+   `a. git clone git@github.com:ntewari29/SuperMarketPriceManager.git`
 2. Open the project in your choice of IDE - New -> Project from VCS -> Git.
 
    a. I personally love IntelliJ.
