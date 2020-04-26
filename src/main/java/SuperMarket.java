@@ -1,5 +1,3 @@
-import lombok.val;
-
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,7 +79,7 @@ class SuperMarket {
             sb.append(header + "\n");
             for (Cart cart : myCart) {
                 Inventory inventory = cart.getItem();
-                val checkoutQty = cart.getQty();
+                int checkoutQty = cart.getQty();
                 sb.append(inventory.getSerialNumber() + paddedSpaces);
                 sb.append(cart.getItem().getItemName());
                 for (int i = cart.getItem().getItemName().length(); i < 16; i++) {
@@ -93,8 +91,7 @@ class SuperMarket {
                         itemPrice = cart.getItem().getItemPrice().multiply(BigDecimal.valueOf(cart.getQty())).subtract(calculatePromotion());
                         sb.append("               " + itemPrice + "\n");
                         break;
-                    }
-                    else if (!promotions.getItemOnPromo().equals(cart.getItem().getItemName()) && !promotions.getPromoQty().equals(cart.getQty())) {
+                    } else if (!promotions.getItemOnPromo().equals(cart.getItem().getItemName()) && !promotions.getPromoQty().equals(cart.getQty())) {
                         itemPrice = cart.getItem().getItemPrice().multiply(BigDecimal.valueOf(cart.getQty()));
                         sb.append("               " + itemPrice + "\n");
                         break;
@@ -111,6 +108,8 @@ class SuperMarket {
 
     boolean addItemsToTheCart(Inventory itemName, int qty) {
         if (qty <= itemName.getStoreQty()) {
+            for (Inventory inventory : inventoryList) {
+            }
             return myCart.add(new Cart(itemName, qty));
         } else {
             Feedback.report(qty, itemName);
