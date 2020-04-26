@@ -29,7 +29,7 @@ class SuperMarket {
     String receiptClosure = "---------------------------------------------------------------";
     String grandTotal = "\t\t\t\t\tGrand Total: $";
     String savings = "\t\t\t\t\t  You Saved: $";
-    String tailer = "\t\tThanks for Visting! Have a Nice Day";
+    String tailer = "\t\tThanks for Visiting! Have a Nice Day";
     BigDecimal promotionValue;
 
     void addItemToInventory(Inventory inventory) {

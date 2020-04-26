@@ -151,7 +151,7 @@ public class SuperMarketTests {
                                 "---------------------------------------------------------------\n" +
                                 "\t\t\t\t\tGrand Total: $\n" +
                                 "\t\t\t\t\t  You Saved: $\n" +
-                                "\t\tThanks for Visting! Have a Nice Day"));
+                                "\t\tThanks for Visiting! Have a Nice Day"));
     }
 
     @Test
@@ -176,7 +176,7 @@ public class SuperMarketTests {
                                 "---------------------------------------------------------------\n" +
                                 "\t\t\t\t\tGrand Total: $  554.25\n" +
                                 "\t\t\t\t\t  You Saved: $  0\n" +
-                                "\t\tThanks for Visting! Have a Nice Day"));
+                                "\t\tThanks for Visiting! Have a Nice Day"));
     }
 
     @Test
@@ -197,7 +197,7 @@ public class SuperMarketTests {
                                 "---------------------------------------------------------------\n" +
                                 "\t\t\t\t\tGrand Total: $  39.0\n" +
                                 "\t\t\t\t\t  You Saved: $  5.0\n" +
-                                "\t\tThanks for Visting! Have a Nice Day"));
+                                "\t\tThanks for Visiting! Have a Nice Day"));
     }
 
     @Test
