@@ -16,11 +16,11 @@ The Price Manager is designed to enable retailers and multi-channel merchants to
 # How to start working on SuperMarketPriceManager?
 1. Fork and Clone the repo.
    
-   `a. git clone git@github.com:ntewari29/SuperMarketPriceManager.git`
+   `git clone git@github.com:ntewari29/SuperMarketPriceManager.git`
 2. Open the project in your choice of IDE - New -> Project from VCS -> Git.
 
    a. I personally love IntelliJ.
-   Download it here! https://www.jetbrains.com/idea/
+   Download it here! `https://www.jetbrains.com/idea/`
 3. Build the Project and get going!
 
 A Git Guide: https://guides.github.com/activities/hello-world/
