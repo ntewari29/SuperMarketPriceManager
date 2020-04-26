@@ -200,11 +200,11 @@ public class SuperMarketTests {
                                 "\t\tThanks for Visting! Have a Nice Day"));
     }
 
-/*
     @Test
     public void customersCannotAddMoreQtyToTheCartThenTheAvailableInventory() {
         initializeInventory();
-        assertThat(superMarket.addItemsToTheCart(milk, 300),is(true));
+        assertThat(superMarket.addItemsToTheCart(milk, 300),is(false));
+        assertThat(superMarket.addItemsToTheCart(milk, 200),is(true));
+        assertThat(superMarket.addItemsToTheCart(bread, 51),is(false));
     }
-*/
 }

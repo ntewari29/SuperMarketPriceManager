@@ -109,8 +109,13 @@ class SuperMarket {
         return sb.toString();
     }
 
-    void addItemsToTheCart(Inventory itemName, int qty) {
-        myCart.add(new Cart(itemName, qty));
+    boolean addItemsToTheCart(Inventory itemName, int qty) {
+        if (qty <= itemName.getStoreQty()) {
+            return myCart.add(new Cart(itemName, qty));
+        } else {
+            Feedback.report(qty, itemName);
+        }
+        return false;
     }
 
     List<Cart> getMyCart() {
