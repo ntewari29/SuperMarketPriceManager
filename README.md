@@ -2,7 +2,7 @@
 Supermarket Price Manager is a tool aimed at providing retailers and multi-channel merchants with a competitive price manager. The software is designed following the TDD principles and are onboarded onto a CI/CD pipeline. 
 
 # Introduction
-Super Market Price Manager enables retailers and multi-channel merchants to manage their inventory and offer competitive price, the software is one stop shop for all you pricing needs and offers its users a view to ensure that the functionality is intact by means of a CI pipeline.
+Super Market Price Manager enables retailers and multi-channel merchants to manage their inventory and offer competitive price, the software is one stop shop for all your pricing needs and offers its users a view to ensure that the functionality is intact by means of a CI pipeline.
 
 ## Features Offered
    a. TBU
