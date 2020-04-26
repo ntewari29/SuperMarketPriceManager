@@ -3,7 +3,7 @@ import javax.swing.*;
 public interface Feedback {
     static void report(int qty, Inventory itemName) {
         try {
-            String infoMessage = "Quantity " + qty + " added to the cart for " + itemName.getItemName() + " is greater than the available Store inventory " + itemName.getStoreQty();
+            String infoMessage = "Quantity " + qty + " added to the cart for " + itemName.getItemName() + " is greater than the available Store inventory of " + itemName.getStoreQty();
             JOptionPane.showMessageDialog(null, infoMessage, "Error Response: " + "Invalid Order Qty", JOptionPane.ERROR_MESSAGE);
         } catch (NullPointerException ne) {
             System.out.println(ne);
