@@ -108,8 +108,6 @@ class SuperMarket {
 
     boolean addItemsToTheCart(Inventory itemName, int qty) {
         if (qty <= itemName.getStoreQty()) {
-            for (Inventory inventory : inventoryList) {
-            }
             return myCart.add(new Cart(itemName, qty));
         } else {
             Feedback.report(qty, itemName);

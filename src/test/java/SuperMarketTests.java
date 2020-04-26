@@ -205,7 +205,7 @@ public class SuperMarketTests {
         initializeInventory();
         assertThat(superMarket.addItemsToTheCart(milk, 300),is(false));
         assertThat(superMarket.addItemsToTheCart(milk, 200),is(true));
-        assertThat(superMarket.addItemsToTheCart(milk, 1),is(false));
         assertThat(superMarket.addItemsToTheCart(bread, 51),is(false));
+        assertThat(superMarket.addItemsToTheCart(corona, 100),is(true));
     }
 }
