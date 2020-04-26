@@ -40,6 +40,9 @@ class SuperMarket {
                 && inventory.getStoreQty() > 0) {
             inventoryList.add(inventory);
         }
+        else {
+            Feedback.report(inventory);
+        }
     }
 
     void addPromo(Promotions promotions) {
