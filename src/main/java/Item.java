@@ -1,13 +1,13 @@
 import java.math.BigDecimal;
 
-class Inventory {
+class Item {
     private final Boolean hasPromotion;
     private final String serialNumber;
     private final String itemName;
     private final BigDecimal itemPrice;
     private final Integer storeQty;
 
-    Inventory(String serialNumber, String itemName, BigDecimal itemPrice, Integer storeQty, Boolean hasPromotion) {
+    Item(String serialNumber, String itemName, BigDecimal itemPrice, Integer storeQty, Boolean hasPromotion) {
         this.serialNumber = serialNumber;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
