@@ -1,13 +1,13 @@
 class Cart {
-    private final Inventory item;
+    private final Item item;
     private final int qty;
 
-    Cart(Inventory item, Integer qty) {
+    Cart(Item item, Integer qty) {
         this.item = item;
         this.qty = qty;
     }
 
-    Inventory getItem() {
+    Item getItem() {
         return item;
     }
 

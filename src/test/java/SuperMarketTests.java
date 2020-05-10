@@ -14,10 +14,10 @@ public class SuperMarketTests {
 
     private SuperMarket superMarket;
 
-    private Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5d), 200, true);
-    private Inventory corona = new Inventory("2", "Corona", BigDecimal.valueOf(11.25), 300, true);
-    private Inventory bread = new Inventory("3", "Bread", BigDecimal.valueOf(12d), 50, false);
-    private Inventory whisky = new Inventory("4", "Whisky", BigDecimal.valueOf(526d), 70, false);
+    private Item milk = new Item("1", "Milk", BigDecimal.valueOf(5d), 200, true);
+    private Item corona = new Item("2", "Corona", BigDecimal.valueOf(11.25), 300, true);
+    private Item bread = new Item("3", "Bread", BigDecimal.valueOf(12d), 50, false);
+    private Item whisky = new Item("4", "Whisky", BigDecimal.valueOf(526d), 70, false);
 
     @Before
     public void setUp() {
@@ -40,45 +40,45 @@ public class SuperMarketTests {
 
     @Test
     public void checkTheStoreInventory() {
-        List<Inventory> inventory = superMarket.initializeInventory();
-        assertThat(inventory,is(empty()));
+        List<Item> item = superMarket.initializeInventory();
+        assertThat(item,is(empty()));
     }
 
     @Test
     public void checkThatItemsWithInvalidAttributesCannotBeAddedToTheCart() {
-        Inventory garlic = new Inventory("", "Garlic", BigDecimal.valueOf(5.4), 1, false);
-        Inventory moisturiser = new Inventory("2a", "Moisturiser", BigDecimal.valueOf(-50), 10, false);
-        Inventory pitabread = new Inventory("100", "", BigDecimal.valueOf(15), 0, false);
+        Item garlic = new Item("", "Garlic", BigDecimal.valueOf(5.4), 1, false);
+        Item moisturiser = new Item("2a", "Moisturiser", BigDecimal.valueOf(-50), 10, false);
+        Item pitabread = new Item("100", "", BigDecimal.valueOf(15), 0, false);
 
         superMarket.addItemToInventory(garlic);
         superMarket.addItemToInventory(moisturiser);
         superMarket.addItemToInventory(pitabread);
 
-        assertThat(superMarket.getInventoryList(), is(empty()));
+        assertThat(superMarket.getItemList(), is(empty()));
     }
 
     @Test
     public void initiateStoreInventoryAndAssertOnTheItemName() {
-        Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5), 1, false);
-        List<Inventory> inventory = superMarket.initializeInventory();
+        Item milk = new Item("1", "Milk", BigDecimal.valueOf(5), 1, false);
+        List<Item> item = superMarket.initializeInventory();
         superMarket.addItemToInventory(milk);
 
-        assertThat(inventory,is(Collections.singletonList(milk)));
+        assertThat(item,is(Collections.singletonList(milk)));
     }
 
     @Test
     public void verifyThatItemsWithValidPriceCanBeAddedToTheInventory() {
-        List<Inventory> inventory = superMarket.initializeInventory();
+        List<Item> item = superMarket.initializeInventory();
 
-        assertThat(inventory,is(empty()));
-        assertThat(inventory,is(empty()));
+        assertThat(item,is(empty()));
+        assertThat(item,is(empty()));
     }
 
     @Test
     public void addItemsToInventoryAndAssertAgainstThePrice() {
-        Inventory milk = new Inventory("1", "Milk", BigDecimal.valueOf(5), 1, false);
-        Inventory corona = new Inventory("2", "Corona", BigDecimal.valueOf(11.25), 1, false);
-        Inventory whisky = new Inventory("3", "Ardbeg", BigDecimal.valueOf(526), 1, false);
+        Item milk = new Item("1", "Milk", BigDecimal.valueOf(5), 1, false);
+        Item corona = new Item("2", "Corona", BigDecimal.valueOf(11.25), 1, false);
+        Item whisky = new Item("3", "Ardbeg", BigDecimal.valueOf(526), 1, false);
         superMarket.addItemToInventory(milk);
         superMarket.addItemToInventory(corona);
         superMarket.addItemToInventory(whisky);
